@@ -1,0 +1,107 @@
+{% extends 'main.html' %}
+{% block title %}
+<title>
+    Edit Profile | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container text-center mt-3 pt-3 cal" style="align-items:
+    center;">
+    <p class="fs-2 fw-bold" style="color: {{request.session.color}};">શિક્ષક
+        ખાતામાં ફેર બદલ કરો</p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'messages.html' %}
+        <div class="mb-2">
+            {% include "messages.html" %}
+            <label for="formFileLg" class="form-label" style="color:gray;">Choose
+                Profile Picture</label>
+            <input class="form-control form-control-lg" id="formFileLg"
+                type="file" name="pp" value="" style="border-color:
+                {{request.session.color}};color:white;background-color:{{request.session.color}};">
+        </div>
+        <input type="text" class="form-control form-control-lg mb-2"
+            placeholder="Username" name="uname" style="border-color:
+            {{request.session.color}};" value="{{user.username}}"
+            required>
+        <div class="row mb-2">
+            <div class="col">
+                <input type="text" class="form-control form-control-lg"
+                    placeholder="First name"
+                    aria-label="First name" style="border-color:
+                    {{request.session.color}};"
+                    name="fname" value="{{user.first_name}}" required>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control form-control-lg"
+                    placeholder="Last name"
+                    aria-label="Last name" style="border-color:
+                    {{request.session.color}};"
+                    name="lname" value="{{user.last_name}}" required>
+            </div>
+        </div>
+        <input type="email" class="form-control form-control-lg mb-2"
+            placeholder="Email" value="{{user.email}}" name="email"
+            style="border-color: {{request.session.color}};"
+            required>
+        <input type="text" class="form-control form-control-lg mb-2"
+            placeholder="Qalification" name="qualification" style="border-color:
+            {{request.session.color}};" value="{{user_details.qualification}}"
+            required>
+        <input type="text" class="form-control form-control-lg mb-2"
+            placeholder="Subject" name="subject"
+            value="{{user_details.subject}}" style="border-color:
+            {{request.session.color}};"
+            required>
+        <input type="text" class="form-control form-control-lg mb-2"
+            placeholder="Designation" name="designation"
+            value="{{user_details.designation}}" style="border-color:
+            {{request.session.color}};" required>
+        <input type="text" class="numberonly form-control form-control-lg mb-2"
+            placeholder="Contact" name="contact"
+            value="{{user_details.contact}}" style="border-color:
+            {{request.session.color}};"
+            maxlength="10" required>
+        <input type="password" name="pass" class="form-control form-control-lg
+            mb-2" placeholder="Password" style="border-color:
+            {{request.session.color}};"
+            required>
+        <input class="form-control form-control-lg mb-2" id="date" name="date"
+            placeholder="Date Of Joining" type="text"
+            style="border-color: {{request.session.color}};"
+            onfocus="(this.type='date')"
+            required>
+        <input type="text" name="tcode" class="numberonly form-control
+            form-control-lg mb-2" placeholder="Teacher Code"
+            value="{{user_details.teacher_code}}"
+            style="border-color: {{request.session.color}};" required>
+        <div class="mb-2">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"
+                    name="gender" id="Male" value="Male" {{male}}>
+                <label class="form-check-label" for="Male">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"
+                    name="gender" id="Female" value="Female" {{female}}>
+                <label class="form-check-label" for="Female">Female</label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-lg text-white mt-2 w-100"
+            style="background-color: {{request.session.color}};">
+            Sign Up
+        </button>
+        {{user_details.doj}}
+    </form>
+</div>
+<style>
+    @media only screen and (min-width : 1224px) {
+        .cal{
+            width: 450px;
+        }
+/* Styles */
+}
+</style>
+{% endblock content %}

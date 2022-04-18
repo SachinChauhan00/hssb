@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>
+    Generate Trial Cert | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+
+{% block content %}
+<div class="cal container-fluid text-center mt-3 pt-3" style="align-items:center;">
+    <p class="text-white text-capitalize p-4 fs-5" style="background-color: {{request.session.color}};border-radius: 15px;">Generate Trial Cert. For {{detail.student_name}}</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" class="form-control form-control-lg mb-2" placeholder="Certificate Number" name="crno" required>
+        <input type="text" class="form-control form-control-lg mb-2" placeholder="Examination Month-Year" name="exm" required>
+        <input type="text" class="form-control form-control-lg mb-2" placeholder="Subjects" name="sub" required>
+        <input type="text" class="form-control form-control-lg mb-2" placeholder="Attempt" name="attempt" required>
+        <button type="submit" class="btn btn-lg btn btn-outline-dark shadow w-100 mt-1 pt-3 pb-3" style="border-radius: 20px;">Download <i class="bi bi-download" style="font-size: 20px;"></i></button>
+        <a href="{% url 'trial' %}" style="background-color: {{request.session.color}};border-radius:15px;" class="btn text-white btn-md mt-4"><i class="bi bi-arrow-left-circle"></i> Back To Trial Certificate List</a>
+    </form>
+</div>
+<style>
+    @media only screen and (min-width : 1224px) {
+        .cal{
+            width: 50%;
+        }
+/* Styles */
+}
+</style>
+{% endblock content %}
+    
+    

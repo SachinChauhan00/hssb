@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    <title>
+        Account List | Gov. Secondary School Babarkot
+    </title>
+{% endblock title %}
+
+{% block content %}
+<div class="cal container-fluid text-center mt-3 pt-3" style="align-items:center;">
+    <p class="fs-2 fw-bold" style="color: {{request.session.color}}">
+        શિક્ષક ખાતાઓની યાદી
+    </p>
+    <div class="table-responsive">
+        <div style="background-color: {{request.session.color}};border-radius: 20px;">
+        <table class="table text-white">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <!-- <th scope="col">Edit</th> -->
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}                  
+                <tr>
+                    <td class="fw-bold">{{user.first_name}} {{user.last_name}}</td>
+                    <form method="post">
+                        {% csrf_token %}
+                        <!-- <td><button class="btn btn-light" type="submit" name="edit" value="{{user.id}}" style="color: {{request.session.color}};border-radius: 10px;"><i class="bi bi-pen-fill"></i></button></td> -->
+                        <td><button class="btn btn-light" type="submit" name="del_user" value="{{user.id}}" style="color: {{request.session.color}};border-radius: 10px;"><i class="bi bi-person-x-fill"></i></button></td>
+                    </form>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+<style>
+    @media only screen and (min-width : 1224px) {
+        .cal{
+            width: 50%;
+        }
+/* Styles */
+}
+</style> 
+{% endblock content %}
+    
+    

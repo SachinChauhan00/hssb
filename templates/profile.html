@@ -1,0 +1,67 @@
+{% extends 'main.html' %}
+{% block title %}
+<title>
+    Profile | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5 mb-3 d-flex justify-content-center shadow p-3 prof"
+    style="width:250px;height:250px;border-radius:300px;">
+    <img src="{{profdet.profile_picture.url}}" alt="plan_img" class="shadow" width="215" height="215" style="border-radius: 300px;">
+</div>
+<style>
+    .prof{
+    background-color: {{request.session.color}};
+    }
+</style>
+<div class="ps-2 pe-2">
+    <div class="container prof mt-3 p-3 shadow text-center
+        text-white"
+        style="border-radius:20px;">
+        <p class="bd-highlight text-capitalize fs-1 p-2 bg-dark" style="border-radius: 20px;;">
+            <strong>{{profile.first_name}} {{profile.last_name}}
+                ({{profdet.designation}})</strong>
+        </p>
+        <div class="table-responsive">
+            <table class="table text-white">
+                <tbody>
+                    <tr>
+                        <td>Qualification</td>
+                        <td>:</td>
+                        <td>{{profdet.qualification}}</td>
+                    </tr>
+                    <tr>
+                        <td>Contact</td>
+                        <td>:</td>
+                        <td>{{profdet.contact}}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>:</td>
+                        <td>{{profile.email}}</td>
+                    </tr>
+                    <tr>
+                        <td>Subject</td>
+                        <td>:</td>
+                        <td>{{profdet.subject}}</td>
+                    </tr>
+                    <tr>
+                        <td>Date Of Joining</td>
+                        <td>:</td>
+                        <td>{{profdet.date_of_joining}}</td>
+                    </tr>
+                    <tr>
+                        <td>Teacher Code</td>
+                        <td>:</td>
+                        <td>{{profdet.teacher_code}}</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

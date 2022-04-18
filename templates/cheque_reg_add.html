@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>
+    New Cheque Entry | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid text-center mt-3 pt-3"
+    style="align-items:center;width:350px;">
+    <p class="fs-2 fw-bold" style="color: {{request.session.color}};">
+        નવા ચેકની એન્ટ્રી કરો
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="એન્ટ્રી નંબર" name="enno"
+            class="form-control form-control-lg mb-2 numberonly" required>
+        <input type="text" placeholder="તારીખ" name="date"
+            class="form-control form-control-lg mb-2" onfocus="(this.type='date')" required>
+        <input type="text" placeholder="ખર્ચ સદર એજન્સીનું નામ" name="agname"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="ખર્ચની વિગત" name="purchase_detail"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="બિલ નંબર" name="billno"
+            class="form-control form-control-lg mb-2"
+             required>
+        <input type="text" placeholder="ચેક નંબર" name="chequeno"
+            class="form-control form-control-lg mb-2" required>
+            <input type="text" placeholder="ચેકની તારીખ" name="chequedate"
+            class="form-control form-control-lg mb-2" onfocus="(this.type='date')" required>
+            <input type="text" placeholder="રકમ/રૂપિયા" name="amount"
+            class="form-control form-control-lg mb-2" required>
+            <input type="text" placeholder="ચૂકવવાની ચોખ્ખી રકમ" name="payableamount"
+            class="form-control form-control-lg mb-3" required>
+        <button type="submit" class="btn btn-lg text-white w-100"
+            style="background-color: {{request.session.color}};"> Add New Entry <i class="bi
+                bi-person-plus"></i></button>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>
+    ADD KEYWORDS | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid text-center mt-3 pt-3"
+    style="align-items:center;width:350px;">
+    <p class="fs-2" style="color: {{request.session.color}};">
+        ADD KEYWORDS
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Term" name="term" class="form-control
+            form-control-lg mb-2">
+        <input type="text" placeholder="Text" name="txt" class="form-control
+            form-control-lg mb-2">
+        <select class="form-select form-select-lg mb-2" name="lang"
+            aria-label="Floating label select example">
+            <option selected>Select Language</option>
+            <option value="en">English</option>
+            <option value="gu">Gujarati</option>
+        </select>
+        <button type="submit" class="btn btn-lg text-white w-100"
+            style="background-color: {{request.session.color}};">ADD KEYDOWRD <i class="bi
+                bi-node-plus"></i></button>
+    </form>
+</div>
+{% endblock content %}

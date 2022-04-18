@@ -1,0 +1,100 @@
+{% extends "main.html" %}
+{% block title %}
+<title>
+  9th Attendance | Gov. Secondary School Babakot
+</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container cal text-center">
+  <p class="fs-2 fw-bold mt-3 p-3 bg-secondary text-white shadow"
+    style="border-radius:20px;">તા.{{today}} માટે ધોરણ - ૯ ની હાજરી પૂરો <i
+      class="bi bi-card-checklist fs-1"></i> </p>
+  <form method="post">
+    {% csrf_token %}
+
+    {% include "messages.html" %}
+    <div class="mb-3">
+      {% include "svg.html" %}
+      <div class="p-3 bg-success text-white d-flex align-items-center
+        justify-content-center" role="alert" style="border-radius: 20px;">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
+          aria-label="Success:"><use xlink:href="#check-circle-fill"></use></svg>
+        <div class="fs-5 fw-bold">
+          આજે હાજર વિધ્યાર્થીઓની સંખ્યા {{count}} છે.
+        </div>
+      </div>
+    </div>
+    <div class="bg-dark text-white p-3" style="border-radius: 20px;">
+      <form method="post">
+      <div class="border border-white border-3 p-3 mb-3" style="border-radius:
+        20px;">
+        <div class="d-flex">
+          <select name="division" class="form-select me-2">
+            <option value="A">
+              A Division
+            </option>
+            <option value="B">
+              B Division
+            </option>
+            <option value="C">
+              C Division
+            </option>
+            <option value="D">
+              D Division
+            </option>
+            <option value="E">
+              E Division
+            </option>
+            <option value="F">
+              F Division
+            </option>
+          </select>
+          <button type="submit" class="btn btn-light"><i class="bi
+              bi-filter-circle-fill"></i></button>
+        </div>
+      </div>
+    </form>
+      <div class="p-3 mb-3 fs-3" style="background-color:
+        {{request.session.color}};border-radius:20px;">
+        <div class="form-check">
+          <input class="form-check-input check" type="checkbox" id="checkAll"
+            value="option1">
+          <label class="form-check-label text-white fw-bold"
+            for="inlineCheckbox1">બધા હાજર છે.</label>
+        </div>
+      </div>
+      <div class="p-3">
+      {% for student in student %}
+
+      <div class="form-check">
+        <input class="form-check-input check" type="checkbox"
+          name="{{student.student_name}}" value="{{student.student_name}}">
+        <label class="form-check-label" for="inlineCheckbox1">{{student.student_name}}</label>
+      </div>
+      <hr>
+      {% endfor %}
+    </div>
+      <button type="submit" name="next" class="btn btn-lg mt-2 text-white"
+        style="background-color:
+        {{request.session.color}};border-radius:100px;width:
+        70px;height:70px;"><i
+          class="bi bi-arrow-right-circle-fill fs-2"></i></button>
+    </div>
+  </form>
+</div>
+<style>
+  @media only screen and (min-width : 1224px) {
+      .cal{
+          width: 50%;
+      }
+/* Styles */
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+  $("#checkAll").click(function () {
+  $(".check").prop('checked', $(this).prop('checked'));
+});
+</script>
+{% endblock content %}

@@ -1,0 +1,116 @@
+{% extends 'main.html' %}
+{% block title %}
+<title>
+    General Register | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+{% block content %}
+<div class="container-fluid text-center mt-3 pt-3">
+    <form method="post">
+        {% csrf_token %}
+        <div class="d-flex justify-content-between mb-3">
+            <button type="submit" name="download" class="btn text-white pe-4
+                ps-4" style="background-color: {{request.session.color}};border-radius: 20px;"><i
+                    class="bi bi-download" style="font-size: 20px;"></i></button>
+            <p class="fs-2 fw-bold" style="color: {{request.session.color}};">સામાન્ય વય પત્રક</p>
+            <button type="submit" name="add" class="btn text-white pe-4
+                ps-4" style="background-color: {{request.session.color}};border-radius: 20px;"><i
+                    class="bi bi-person-plus-fill" style="font-size: 20px;"></i></button>
+        </div>
+    </form>
+    
+    <div class="p-3 shadow" style="background-color: {{request.session.color}};border-radius:15px">
+        <div class="table-responsive">
+            <table class="table text-white table-bordered border-white">
+                <thead>
+                    <input class="form-control mt-2 mb-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Student Name">
+                    <tr>
+                        <th scope="col">{{cl1}}</th>
+                        <th scope="col">{{cl2}}</th>
+                        <th scope="col">{{cl3}}</th>
+                        <th scope="col">{{cl4}}</th>
+                        <th scope="col">{{cl5}}</th>
+                        <th scope="col">{{cl6}}</th>
+                        <th scope="col">{{cl7}}</th>
+                        <th scope="col">{{cl8}}</th>
+                        <th scope="col">{{cl9}}</th>
+                        <th scope="col">{{cl10}}</th>
+                        <th scope="col">{{cl11}}</th>
+                        <th scope="col">{{cl12}}</th>
+                        <th scope="col">{{cl13}}</th>
+                        <th scope="col">{{cl14}}</th>
+                        <th scope="col">{{cl15}}</th>
+                        <th scope="col">{{cl16}}</th>
+                        <th scope="col">{{cl17}}</th>
+                        <th scope="col">{{cl18}}</th>
+                        <th scope="col">{{cl19}}</th>
+                        <th scope="col">{{cl20}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for gr in gr %}
+                    <tr>
+                        <th scope="row">{{gr.gr_number}}</th>
+                        <td>{{gr.student_name}}</td>
+                        <td>{{gr.mother_name}}</td>
+                        <td>{{gr.religion}}</td>
+                        <td>{{gr.birth_place}}</td>
+                        <td>{{gr.dob}}</td>
+                        <td>{{gr.dob_in_words}}</td>
+                        <td>{{gr.previous_school_std}}</td>
+                        <td>{{gr.school_joining}}</td>
+                        <td>{{gr.admission_std}}</td>
+                        <td>{{gr.fees}}</td>
+                        <td>{{gr.date_leaving}}</td>
+                        <td>{{gr.leaving_std}}</td>
+                        <td>{{gr.leaving_reason}}</td>
+                        <td>{{gr.progress}}</td>
+                        <td>{{gr.behaviour}}</td>
+                        <td>{{gr.date_taking_lc}}</td>
+                        <td>{{gr.note}}</td>
+                        <td><a class="link-light" href=""><i class="bi
+                                    bi-pencil-square" style="font-size: 20px;"></i></a></td>
+                        <td><a class="link-light" href=""><i class="bi bi-trash"
+                                    style="font-size: 20px;"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<style>
+    .dropdown-menu > li > a {
+        background-image: none;
+        color: {{request.session.color}};
+    }
+    .dropdown-menu > li > a:hover {
+        background-image: none;
+        background-color: {{request.session.color}};
+        color: white;
+    }
+</style>
+<script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+  </script>
+{% endblock content %}

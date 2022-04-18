@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>
+    New Bill Entry | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid text-center mt-3 pt-3"
+    style="align-items:center;width:350px;">
+    <p class="fs-2 fw-bold" style="color: {{request.session.color}};">
+        નવી બિલ એન્ટ્રી કરો
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="એન્ટ્રી નંબર" name="enno"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="બિલ આપનારનું નામ" name="bill_from"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="તારીખ" name="date"
+            class="form-control form-control-lg mb-2" onfocus="(this.type='date')" required>
+        <input type="text" placeholder="બિલ/વાઉચર નંબર" name="bill"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="બિલની રકમ રૂપિયામાં" name="amount"
+            class="form-control form-control-lg mb-2"
+             required>
+        <input type="text" placeholder="ચૂકવવાની ચોક્કસ રકમ" name="payable"
+            class="form-control form-control-lg mb-2" required>
+
+        <button type="submit" class="btn btn-lg text-white w-100"
+            style="background-color: {{request.session.color}};"> Add New Entry <i class="bi
+                bi-person-plus"></i></button>
+    </form>
+</div>
+{% endblock content %}

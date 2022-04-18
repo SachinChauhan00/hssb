@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}
+    <title>
+        Staff | Gov. Secondary School Babarkot
+    </title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container text-center">
+        <p class="fs-2 mt-3 mb-3" style="color: {{request.session.color}};"><b>અમારી સંસ્થાનો સ્ટાફ</b></p>
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+            {% for teacher in teacher %}
+              
+            <div class="col">
+              <div class="card h-100 zoom border-light text-white bg-dark p-4 shadow" style="border-radius: 20px;">
+                <img src="{{teacher.profile_picture.url}}" class="card-img-top " alt="staff-profile" style="border-radius: 20px;">
+                <hr>
+                <div class="card-body">
+                  <h5 class="card-title"><b>{{teacher.user.first_name}} {{teacher.user.last_name}}</b></h5>
+                  <p class="card-text"><b>({{teacher.designation}}) {{teacher.qualification}}<br>
+                    વિષય - {{teacher.subject}}<b></p>
+                </div>
+              </div>
+            </div>
+            
+            {% endfor %}
+          </div>
+    </div>
+    <style>
+      
+    .zoom {
+        transition: transform .2s;
+    }
+    .zoom:hover {
+        transform: scale(0.8); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+      }
+    </style>
+{% endblock content %}
+    
+    

@@ -1,0 +1,109 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}
+<title>Home | Gov. Secondary School Babarkot</title>
+{% endblock title %}
+{% block content %}
+
+{% load static %}
+<div id="carouselExampleDark"
+     class="carousel slide"
+     data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button"
+                data-bs-target="#carouselExampleDark"
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1">
+        </button>
+        <button type="button"
+                data-bs-target="#carouselExampleDark"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+        
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="5000" >
+            <img src="{% static 'img/Stripe.png' %}"
+                 class="d-block w-100"
+                 height="600"
+                 alt="...">
+            
+            <div class="carousel-caption" style="margin-bottom: 100px;">
+              <img src="{% static 'img/logo.png' %}" alt="logo" width="300">
+                <p class="fs-1 fw-bold">
+                   	સુસ્વાગતમ્
+                </p>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="{% static 'img/Stripe(1).png' %}"
+                 class="d-block w-100"
+                 height="600"
+                 alt="...">
+            <div class="carousel-caption text-white p-1 border border-white border-3 " style="margin-bottom: 200px; border-radius: 20px;">
+                <p class="fs-1 fw-bold">
+                    {{quote.term}}
+                </p>
+                <p class="fs-2">
+                    {{quote.qoute}}
+              </p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+<style>
+    .card{
+        border-radius:30px;
+        background-image: url('{% static 'img/Stripe.png' %}');
+        height:150px;
+ 
+    }
+</style>
+<div class="container text-center">
+<p class="fs-2 mt-4 fw-bold text-shadow-2" style="color: {{request.session.color}};">શાળાનાં ત્રણ સૂત્રો</p>
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4">
+      
+      <div class="col">
+        <div class="card card-cover overflow-hidden text-white bg-dark shadow-lg">
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+            <h3 class="fs-5 fw-bold"><i class="bi bi-vector-pen"></i> શિસ્ત, સંસ્કાર અને શિક્ષણનો ત્રિવેણી સંગમ એટલે અમારી સંસ્થા.</h3>
+          </div>
+        </div>
+      </div>
+        <div class="col">
+          <div class="card card-cover overflow-hidden text-white bg-dark shadow-lg">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-3">
+            <h3 class="fs-5 fw-bold"><i class="bi bi-vector-pen"></i> અગવડતાઓ માં સગવડતા ઊભી કરવી એ અમારો સ્વભાવ છે.</h3>
+            </div>
+          </div>
+        </div>
+  
+  
+        <div class="col">
+          <div class="card card-cover overflow-hidden text-white bg-dark shadow-lg" >
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+              <h3 class="fs-5 fw-bold"><i class="bi bi-vector-pen"></i>  શિક્ષાને જીવનનું શ્રેષ્ઠ સાધન બનાવવું.</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+{% endblock content %}

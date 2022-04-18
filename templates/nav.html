@@ -1,0 +1,283 @@
+{% load static %}
+<style>
+  .linear-wipe {
+	background: linear-gradient(-45deg, #1FA2FF, #12D8FA, #A6FFCB, #1FA2FF);
+	background-size: 300%;
+    font-family: 'Concert One', cursive;
+    letter-spacing: -1px;
+	text-transform: uppercase;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: animated_text 10s ease-in-out infinite;
+	-moz-animation: animated_text 10s ease-in-out infinite;
+	-webkit-animation: animated_text 10s ease-in-out infinite;
+}
+
+@keyframes animated_text {
+	0% { background-position: 0px 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0px 50%; }
+}
+.pad{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+li{
+  font-family: 'Ubuntu', sans-serif;
+}
+
+
+</style>
+<nav class="pad navbar navbar-expand-lg navbar-light bg-light shadow
+    sticky-top">
+    <div class="container-fluid">
+        <a class="linear-wipe navbar-brand fs-3" href="{% url 'index' %}">
+            <img src="{% static 'img/helo.png' %}" alt="icon" width="55"
+                height="30">
+            <b>માધ્યમિક શાળા બાબરકોટ</b>
+        </a>
+        <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarColor02"
+            aria-controls="navbarColor02"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {{ home }} fw-bold"
+                        aria-current="page"
+                        href="{% url 'index' %}"> હોમ</a>
+                </li>
+                {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link {{nav}} fw-bold dropdown-toggle"
+                        href="#"
+                        data-bs-toggle="dropdown"
+                        data-bs-auto-close="outside">આચાર્ય મેનૂ</a>
+                    <ul class="dropdown-menu shadow space"
+                        style="background-color:{{ request.session.color }};">
+                        <li class="dropend">
+                            <a href="#"
+                                class="dropdown-item dropdown-toggle fw-bold"
+                                data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside">વિધ્યાર્થી સંચાલન</a>
+                            <ul class="dropdown-menu shadow bg-dark">
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'attence' %}">હાજરી</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'add_remove_st' %}">વિધ્યાર્થી ઉમેરો કે ઘટાડો</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'viewattence' %}">હાજરી ચકાસો</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropend">
+                            <a href="#"
+                                class="dropdown-item dropdown-toggle fw-bold"
+                                data-bs-toggle="dropdown">વેબસાઇટ વપરાશકર્તા સંચાલન</a>
+                            <ul class="dropdown-menu shadow bg-dark">
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'register' %}">શિક્ષક માટે ખાતું બનાવો</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'account_list' %}">શિક્ષકના ખાતા ચકાસો</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="dropend">
+                            <a href="#"
+                                class="dropdown-item dropdown-toggle fw-bold"
+                                data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside">વહીવટી</a>
+                            <ul class="dropdown-menu shadow bg-dark">
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'gr_view' %}">સામાન્ય વય પત્રક</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'trial' %}">ટ્રાયલ સર્ટિફિકેટ</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'bona' %}">બોનાફાઇડ સર્ટિફિકેટ</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'birth' %}">બર્થ સર્ટિફિકેટ</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropend">
+                            <a href="#"
+                                class="dropdown-item dropdown-toggle fw-bold"
+                                data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside">હિસાબી</a>
+                            <ul class="dropdown-menu shadow bg-dark">
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'grant' %}">ગ્રાન્ટ રજીસ્ટર</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'ledger' %}">ખાતાવહી</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'cashbook' %}">રોજમેળ</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'cheque_reg' %}">ચેક રજીસ્ટર</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'billbook' %}">બિલ બૂક</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item fw-bold" href="{% url 'qoute' %}">આજનો સુવિચાર</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item fw-bold" href="{% url 'addlink' %}">લિંક્સ ઉમેરો</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item fw-bold" href="{% url 'addnotice' %}">નોટિસ ઉમેરો</a>
+                        </li>
+                    </ul>
+                </li>
+                {% else %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link {{teach}} fw-bold dropdown-toggle"
+                        href="#"
+                        data-bs-toggle="dropdown"
+                        data-bs-auto-close="outside">શિક્ષક મેનૂ</a>
+                    <ul class="dropdown-menu shadow space"
+                        style="background-color:{{ request.session.color }};">
+                        <li class="dropend">
+                            <a href="#"
+                                class="dropdown-item dropdown-toggle fw-bold "
+                                data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside">વિધ્યાર્થી સંચાલન</a>
+                            <ul class="dropdown-menu bg-dark shadow">
+                                <li>
+                                    <a class="dropdown-item fw-bold " href="{% url 'attence' %}">હાજરી</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'add_remove_st' %}">વિધ્યાર્થી ઉમેરો કે ઘટાડો</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'viewattence' %}">હાજરી ચકાસો</a>
+                                </li>
+                            </ul>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item fw-bold" href="{% url 'teacherlink' %}">ઉપયોગી લિંક્સ</a>
+                            </li>
+                        </li>
+                    </ul>
+                </li>
+                {% endif %}
+                {% endif %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link {{stu}} fw-bold dropdown-toggle"
+                        href="#"
+                        data-bs-toggle="dropdown"
+                        data-bs-auto-close="outside">વિધ્યાર્થી મેનૂ</a>
+                    <ul class="dropdown-menu shadow space"
+                        style="background-color:{{ request.session.color }};">
+                        <li>
+                            <a class="dropdown-item fw-bold" href="{% url 'admission' %}"> પ્રવેશ</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item fw-bold" href="{% url 'notice'%}"> નોટિસબોર્ડ</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item fw-bold" href="{% url 'studlink' %}"> ઉપયોગી લિંક્સ</a>
+                        </li>
+                    </ul>
+                </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold {{staff}}" href="{% url 'staff'%}"> સ્ટાફ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold {{gallery}}" href="{% url 'gallery'%}"> શાળા ગેલેરી</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link {{about}} fw-bold dropdown-toggle"
+                            href="#"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside">સંસ્થા વિષે વધુ જાણો</a>
+                        <ul class="dropdown-menu shadow space"
+                            style="background-color:{{ request.session.color }};">
+                            <li>
+                                <a class="dropdown-item fw-bold" href="{% url 'vision' %}"> શાળાનો ધ્યેય અને મિશન</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item fw-bold" href="{% url 'notice'%}"> આચાર્યશ્રીનો સંદેશ</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item fw-bold" href="{% url 'studlink' %}">માર્ગદર્શન</a>
+                            </li>
+                        </ul>
+                    </li>
+                </li>
+                </ul>
+            
+            
+            {% if user.is_authenticated %}
+            <div class="d-flex">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link {{prol}}"
+                            href="{% url 'profile' %}"
+                            style="border-radius: 10px;"><i class="bi
+                                bi-person-circle me-2" style="color:
+                                {{request.session.color}};"></i><b>{{user.first_name}}</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn text-white"
+                            href="{% url 'logout' %}"
+                            style="border-radius: 10px;
+                            background-color: {{ request.session.color }};
+                            padding-left: 20px;
+                            padding-right: 20px;">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+            {% else %}
+            <!-- <div class="d-flex">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link btn text-white"
+                               href="{% url 'login' %}"
+                               style="border-radius: 10px;
+                                      background-color: {{ request.session.color }};
+                                      padding-left: 20px;
+                                      padding-right: 20px;">Log In</a>
+                        </li>
+                    </ul>
+                </div> -->
+            {% endif %}
+        </div>
+    </div>
+    <!-- modal -->
+    <!-- modal -->
+
+</nav>
+<style>
+    @media only screen and (max-width: 480px) {
+
+        .space{
+            margin-bottom: 20px;
+        }
+
+      
+    }
+    
+</style>

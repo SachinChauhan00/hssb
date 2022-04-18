@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    <title>
+        Add Useful Links | Gov. Secondary School Babarkot
+    </title>
+{% endblock title %}
+    
+{% block content %}
+    <div class="cal container text-center">
+    <p class="fs-2 mt-3" style="color: {{request.session.color}};">Add Useful Links</p>
+        {% include "messages.html" %}
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="term" placeholder="Enter Title" class="form-control mb-2" required>
+            <input type="text" name="link" placeholder="Enter Link" class="form-control mb-2" required>
+            <select name="category" class="form-select" required>
+                <option value="student">
+                    Student
+                </option>
+                <option value="teacher">
+                    Teacher
+                </option>
+            </select>
+            <button type="submit" class="btn text-white mt-3 w-100" style="background-color: {{request.session.color}};"> Submit</button>
+        </form>
+    </div>
+    <style>
+        @media only screen and (min-width : 1224px) {
+            .cal{
+                width: 50%;
+            }
+    /* Styles */
+    }
+    </style>
+{% endblock content %}
+    

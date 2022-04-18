@@ -1,0 +1,143 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>
+    GR New Entry | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid cal text-center mt-3 pt-3"
+    style="align-items:center;">
+    <p class="fs-2 fw-bold" style="color: {{request.session.color}};">
+        જી.આર. માં નવી એન્ટ્રી કરો
+    </p>
+    {% include 'messages.html' %}
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="GR Number" name="gr_num"
+            class="form-control form-control-lg mb-2 numberonly" required>
+        <input type="text" placeholder="જી.આર.નં." name="gr_num_gu"
+            class="form-control form-control-lg mb-2 numberonly" required>  
+        <input type="text" placeholder="Student Full Name" name="full_name"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="વિધ્યાર્થીનું પુરુ નામ" name="full_name_gu"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="Mother Name" name="moth_name"
+            class="form-control form-control-lg mb-2">
+        <input type="text" placeholder="માતાનું નામ" name="moth_name_gu"
+            class="form-control form-control-lg mb-2">
+        <div class="form-text mb-2">
+            ( વિધ્યાર્થીનું પુરુ નામ અને માતાનું નામ, અટક પ્રથમ લખવી. )
+        </div>
+        <input type="text" placeholder="Religion And Race" name="religion"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="ધર્મ અને જાતિ" name="religion_gu"
+            class="form-control form-control-lg mb-2" required>
+        <div class="form-text mb-2">
+            ( અનુસુચિત જાતિ, અનુ. જનજાતિ કે બક્ષિપંચના હોય તો અહી દર્શાવવું. )
+        </div>
+        <input type="text" placeholder="Place Of Birth" name="birth_place"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="જન્મ સ્થળ" name="birth_place_gu"
+            class="form-control form-control-lg mb-2" required>
+        <div class="form-text mb-2">
+            ( તાલુકા, જિલ્લા સહિત )
+        </div>
+        <input type="text" placeholder="Date Of Birth" name="dob"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="જન્મ તારીખ" name="dob_gu"
+            class="form-control form-control-lg mb-2" required>
+            <div class="form-text mb-2">
+                ( ખ્રિસ્તી વર્ષ અનુસાર જન્મની તારીખ, મહિનો, સાલ )
+            </div>
+        <input type="text" placeholder="Date Of Birth In Words"
+            name="dob_in_words" class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="જન્મ તારીખ શબ્દોમાં"
+            name="dob_in_words_gu" class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="Previous School & STD"
+            name="previos_school_std" class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="પૂર્વ શાળા અને ધોરણ"
+            name="previos_school_std_gu" class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="Date Of School Joining" name="dosj"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="નિશાળમાં દાખલ થયાની તારીખ" name="dosj_gu"
+            class="form-control form-control-lg mb-2" required>
+            <div class="form-text mb-2">
+                ( ખાતાની મંજૂરી હોય તો તેની નોંધ )
+            </div>
+        <input type="text" placeholder="Admission Standard" name="admission_std"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="પ્રવેશ આપેલ ધોરણ" name="admission_std_gu"
+            class="form-control form-control-lg mb-2" required>
+            <div class="form-text mb-2">
+                ( પ્રવેશ આપવામાં આવેલ ધોરણ અને વર્ગ )
+            </div>
+        <input type="text" placeholder="Fees Or Waiver" name="fees"
+            class="form-control form-control-lg mb-2">
+        <input type="text" placeholder="ફી ભરીને કે માફી" name="fees_gu"
+            class="form-control form-control-lg mb-2">
+        <input type="text" placeholder="Date Of Leaving School" name="dols"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="શાળા છોડયાની તારીખ" name="dols_gu"
+            class="form-control form-control-lg mb-2" required>
+            
+        <input type="text" placeholder="Standard When Leaving School"
+            name="stdleaving" class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="શાળા છોડતી વખતે ધોરણ"
+            name="stdleaving_gu" class="form-control form-control-lg mb-2" required>
+            <div class="form-text mb-2">
+                ( શાળા છોડતી વખતે ધોરણ અને વર્ગ )
+            </div>
+        <input type="text" placeholder="Reason Of Leaving School"
+            name="leaving_reason" class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="શાળા છોડવાનું કારણ"
+                name="leaving_reason_gu" class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="Progress" name="progress"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="પ્રગતિ" name="progress_gu"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="Behaviour" name="behaviour"
+            class="form-control form-control-lg mb-2"
+             required>
+        <input type="text" placeholder="વર્તણૂક" name="behaviour_gu"
+             class="form-control form-control-lg mb-2"
+              required>
+        <input type="text" placeholder="Date Of Taking LC" name="dotl"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="એલ.સી. આપ્યા ની તારીખ" name="dotl_gu"
+            class="form-control form-control-lg mb-2" required>
+        <input type="text" placeholder="Note" name="note" class="form-control
+            form-control-lg mb-2" required>
+        <input type="text" placeholder="નોંધ" name="note_gu" class="form-control
+            form-control-lg mb-2" required>
+            <div class="form-text mb-2">
+                ( બાકી ફી, ડુપ્લિકેટ સર્ટી. વિગેરે )
+            </div>
+        <button type="submit" class="btn btn-lg text-white w-100" style="background-color:{{request.session.color}};;"> Add New Entry <i class="bi bi-person-plus"></i></button>
+    </form>
+</div>
+<script>
+    $(document).ready(function () {    
+    
+        $('.numberonly').keypress(function (e) {    
+
+            var charCode = (e.which) ? e.which : event.keyCode    
+
+            if (String.fromCharCode(charCode).match(/[^0-9]/g))    
+
+                return false;                        
+
+        });    
+
+    });  
+</script>
+<style>
+    @media only screen and (min-width : 1224px) {
+        .cal{
+            width: 400px;
+        }
+/* Styles */
+}
+</style>  
+{% endblock content %}

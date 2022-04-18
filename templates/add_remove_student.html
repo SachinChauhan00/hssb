@@ -1,0 +1,235 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>
+    Add/Remove Student | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container cal text-center mt-4" style="border-radius:20px;">
+    <p class="fs-2 text-white">Add/Remove Student Data</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="student_name" placeholder="Student Name"
+            class="form-control mb-2" onkeyup="this.value=
+            this.value.toLowerCase();">
+        <select class="form-select mb-2"
+            name="std"
+            id="floatingSelect"
+            aria-label="Floating label select example">
+            <option value="STD 10" selected>
+                STD 10
+            </option>
+            <option value="STD 9">
+                STD 9
+            </option>
+        </select>
+        <select class="form-select mb-2"
+            name="gender"
+            id="floatingSelect"
+            aria-label="Floating label select example">
+            <option value="Male" selected>
+                Male
+            </option>
+            <option value="Female">
+                Female
+            </option>
+        </select>
+        <select class="form-select mb-2"
+            name="cast"
+            id="floatingSelect"
+            aria-label="Floating label select example">
+            <option value="OBC" selected>
+                OBC
+            </option>
+            <option value="SC">
+                SC
+            </option>
+            <option value="ST">
+                ST
+            </option>
+            <option value="General">
+                General
+            </option>
+        </select>
+        <select class="form-select mb-2"
+            name="division"
+            id="floatingSelect"
+            aria-label="Floating label select example">
+            <option value="A" selected>
+                A
+            </option>
+            <option value="B">
+                B
+            </option>
+            <option value="C">
+                C
+            </option>
+            <option value="D">
+                D
+            </option>
+            <option value="E">
+                E
+            </option>
+            <option value="F">
+                F
+            </option>
+        </select>
+        <input type="tel" class="form-control mb-2"
+            placeholder="UDISE Number" name="UDISE" onkeypress="return isNumber(event)" minlength="18" maxlength="18">
+        <button type="submit" name="addstud" class="btn btn-dark btn-lg w-100"
+            style="color: white;"> Add Student <i class="bi
+                bi-person-plus-fill"></i></button>
+    </form>
+    <p class="fs-2 text-white mt-3">
+        Students Data List
+    </p>
+    {% include "messages.html" %}
+    <div class="border border-light border-3 p-3 mb-3 shadow"
+        style="border-radius: 20px;">
+        <form method="post">
+            {% csrf_token %}
+            <div class="d-flex mb-2 justify-content-center">
+                <input type="text" class="form-control me-2" name="namefilter"
+                    placeholder="Search Student Name" onkeyup="this.value=
+                    this.value.toLowerCase();">
+                <button class="btn btn-light" name=namebtn><i class="bi
+                        bi-search"></i></button>
+            </div>
+            <div class="d-flex mb-2 justify-content-center">
+                <input type="tel" class="form-control me-2" name="udisefilter"
+                    placeholder="Search UDISE Number" onkeypress="return isNumber(event)">
+                <button class="btn btn-light" name="udisebtn"><i class="bi
+                        bi-search"></i></button>
+            </div>
+            <div class="p-3 border border-white border-3 shadow mt-3" style="border-radius: 20px;">
+                <div class="d-flex">
+                    <select name="divfilter" id="divfilter" class="form-select
+                        me-2">
+                        <option value="All" selected>
+                            All Division
+                        </option>
+                        <option value="A">
+                            A
+                        </option>
+                        <option value="B">
+                            B
+                        </option>
+                        <option value="C">
+                            C
+                        </option>
+                        <option value="D">
+                            D
+                        </option>
+                        <option value="E">
+                            E
+                        </option>
+                        <option value="F">
+                            F
+                        </option>
+                    </select>
+                    <button class="btn btn-light me-2" name="divbtn"> <i class="bi bi-binoculars-fill"></i></button>
+                    <select name="stdfilter" id="stdfilter" class="form-select me-2">
+                        <option value="All" selected>All Standard</option>
+                        <option value="STD 10">STD 10</option>
+                        <option value="STD 9">STD 9</option>
+                    </select>
+                    <button class="btn btn-light" name="stdbtn"> <i class="bi bi-binoculars-fill"></i></button>
+                </div>
+                <div class="d-flex mt-2">
+                    <select class="form-select me-2"
+                        name="castfilter"
+                        id="castfilter"
+                        aria-label="Floating label select example">
+                        <option value="All" selected>
+                            All Cast
+                        </option>
+                        <option value="OBC">
+                            OBC
+                        </option>
+                        <option value="SC">
+                            SC
+                        </option>
+                        <option value="ST">
+                            ST
+                        </option>
+                        <option value="General">
+                            General
+                        </option>
+                    </select>
+                    <button class="btn btn-light me-2" name="castbtn"> <i class="bi bi-binoculars-fill"></i></button>
+
+                    <select class="form-select me-2"
+                        name="genderfilter"
+                        id="genderfilter"
+                        aria-label="Floating label select example">
+                        <option value="All" selected>
+                            All Gender
+                        </option>
+                        <option value="Male">
+                            Male
+                        </option>
+                        <option value="Female">
+                            Female
+                        </option>
+                    </select>
+                    <button class="btn btn-light" name="genbtn"> <i class="bi bi-binoculars-fill"></i></button>
+                </div>
+                <button type="submit" class="btn btn-light mt-2 w-100" id="filter"
+                        name="filter"> <i class="bi bi-funnel-fill"></i> Filter By All</button>
+            </div>
+        </form>
+    </div>
+    <ul class="list-group">
+
+        {% for ls in studlist %}
+
+        <li class="mb-1 list-group-item d-flex justify-content-between
+            align-items-center text-capitalize" style="border-radius: 10px;">
+            {{ls.student_name}}<br>({{ls.standard}}{{ls.division}}) <br>(UDISE -
+            {{ls.udise}})
+            <form method="post">
+                {% csrf_token %}
+                <a href="{% url 'edit_st' ls.id %}" class="btn text-white" style="background-color: {{request.session.color}};">
+                    <i class="bi bi-pencil-fill"></i>
+                </a>
+                <button type="submit" class="btn text-white" name="delete"
+                    value="{{ls.id}}" style="background-color:
+                    {{request.session.color}};"><i class="bi bi-person-x-fill"></i></button>
+            </form>
+        </li>
+
+        {% endfor %}
+    </ul>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<style>
+    @media only screen and (min-width : 1224px) {
+        .cal{
+            width: 50%;
+        }
+/* Styles */
+        
+}
+.wrapper,.push{
+    background-color: {{request.session.color}};
+}
+</style>
+<style>
+    body{
+        background-color: {{request.session.color}};
+    }
+</style>
+<script type="text/javascript">
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if ((charCode > 31 && charCode < 48) || charCode > 57) {
+            return false;
+        }
+        return true;
+    }
+</script>
+{% endblock content %}

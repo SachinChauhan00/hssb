@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+{% block title %}
+<title>
+    Choose Standard | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+{% block content %}
+<div class="container mt-4 text-center" style="align-items: center;">
+    <div class="mb-4 text-white" style=" border-radius: 20px;">
+        <h1><b>હાજરી માટે ધોરણ પસંદ કરો</b></h1>
+    </div>
+    <!-- <div class="container" style="align-items: center;"> -->
+    <div class="mb-4 mt-5">
+        <a class="btn btn-lg shadow p-5 zoom" href="{% url 'tenth' %}"
+            style="border-radius: 25px;background-color: white;font-size: 30px;
+            color: {{request.session.color}};width: 250px;"><i class="bi bi-hexagon-fill" style="font-size:
+                40px;"></i><br> <b>ધોરણ ૧૦</b></a>
+    </div>
+    <div>
+        <a class="btn btn-lg shadow p-5 zoom" href="{% url 'nineth' %}" style="border-radius:
+            25px;background-color: white;font-size: 30px; color: {{request.session.color}};width: 250px;"><i
+                class="bi bi-hexagon" style="font-size: 40px;"></i><br>
+            <b>ધોરણ ૯</b></a>
+    </div>
+</div>
+<!-- </div> -->
+<style>
+        body{
+            background-color: {{request.session.color}};
+        }
+        .zoom {
+            transition: transform .2s;
+        }
+        .zoom:hover {
+            transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+          }
+        .push{
+            background-color:{{request.session.color}};
+        }
+        .wrapper{
+            background-color:{{request.session.color}};   
+        }
+    </style>
+{% endblock content %}

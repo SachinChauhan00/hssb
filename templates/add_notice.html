@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>
+    Add Notice | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+{% block content %}
+<div class="container cal text-center">
+    <p class="fs-2 fw-bold mt-3" style="color: {{request.session.color}};">નોટિસ
+        ઉમેરો</p>
+    {% include "messages.html" %}
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" class="form-control mb-2" name="title"
+            placeholder="Notice Title">
+        <textarea name="body" class="form-control mb-2" cols="30" rows="5"
+            placeholder="Notice Body"></textarea>
+        <button type="submit" class="btn w-100 text-white"
+            style="background-color: {{request.session.color}};">Submit</button>
+    </form>
+</div>
+<style>
+    @media only screen and (min-width : 1224px) {
+        .cal{
+            width: 50%;
+        }
+/* Styles */
+}
+</style>
+{% endblock content %}

@@ -1,0 +1,120 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    <title>
+        Edit Student Data | Gov. Secondary School Babarkot
+    </title>
+{% endblock title %}
+
+{% block content %}
+<div class="container cal text-center mt-4" style="border-radius:20px;">
+    <p class="fs-2 text-white">Edit Student Data</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="student_name" placeholder="Student Name"class="form-control mb-2" onkeyup="this.value=this.value.toLowerCase();" value="{{student.student_name}}">
+        <select class="form-select mb-2"
+            name="std"
+            id="std"
+            aria-label="Floating label select example">
+            <option value="STD 10">
+                STD 10
+            </option>
+            <option value="STD 9">
+                STD 9
+            </option>
+        </select>
+        <select class="form-select mb-2"
+            name="gender"
+            id="gender"
+            aria-label="Floating label select example">
+            <option value="Male">
+                Male
+            </option>
+            <option value="Female">
+                Female
+            </option>
+        </select>
+        <select class="form-select mb-2"
+            name="cast"
+            id="cast"
+            aria-label="Floating label select example">
+            <option value="OBC">
+                OBC
+            </option>
+            <option value="SC">
+                SC
+            </option>
+            <option value="ST">
+                ST
+            </option>
+            <option value="General">
+                General
+            </option>
+        </select>
+        <select class="form-select mb-2"
+            name="division"
+            id="division"
+            aria-label="Floating label select example">
+            <option value="A">
+                A
+            </option>
+            <option value="B">
+                B
+            </option>
+            <option value="C">
+                C
+            </option>
+            <option value="D">
+                D
+            </option>
+            <option value="E">
+                E
+            </option>
+            <option value="F">
+                F
+            </option>
+        </select>
+        <input type="tel" class="form-control mb-2"
+            placeholder="UDISE Number" name="UDISE" onkeypress="return isNumber(event)" minlength="18" maxlength="18" value="{{student.udise}}">
+        <button type="submit" name="addstud" class="btn btn-dark btn-lg w-100"
+            style="color: white;"> Update Student Data <i class="bi bi-cloud-arrow-up-fill"></i></button>
+    </form>
+</div>
+<style>
+    body,.push,.wrapper{
+        background-color: {{request.session.color}};
+    }
+    
+</style>
+<style>
+    @media only screen and (min-width : 1224px) {
+        .cal{
+            width: 50%;
+        }
+/* Styles */
+        
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $( document ).ready(function() {
+        $('#std option[value="{{student.standard}}"]').attr("selected", "selected");
+        $('#gender option[value="{{student.gender}}"]').attr("selected", "selected");
+        $('#cast option[value="{{student.cast}}"]').attr("selected", "selected");
+        $('#division option[value="{{student.gender}}"]').attr("selected", "selected");
+
+    });
+</script>
+<script type="text/javascript">
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if ((charCode > 31 && charCode < 48) || charCode > 57) {
+            return false;
+        }
+        return true;
+    }
+</script>
+{% endblock content %}
+    
+    

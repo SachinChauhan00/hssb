@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>
+    Cash Book | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid text-center mt-3 pt-3" style="align-items:center;">
+    <form method="post">
+        {% csrf_token %}
+        <div class="d-flex justify-content-between mb-3">
+            <button type="submit" name="export" class="btn text-white pe-4
+                ps-4" style="background-color: {{request.session.color}};border-radius: 20px;"><i
+                    class="bi bi-download" style="font-size: 20px;"></i></button>
+            <p class="fs-2 fw-bold" style="color: {{request.session.color}};">રોજમેળ</p>
+            <button type="submit" name="add-entry" class="btn text-white pe-4
+                ps-4" style="background-color: {{request.session.color}};border-radius: 20px;"><i
+                    class="bi bi-person-plus-fill" style="font-size: 20px;"></i></button>
+        </div>
+    </form>
+    <div class="shadow p-3" style="border-radius: 20px;background-color:
+        {{request.session.color}};">
+        <div class="table-responsive">
+            <table class="table text-white">
+                <thead>
+                    <tr>
+                        <th scope="col">એન્ટ્રી નં.</th>
+                        <th scope="col">તારીખ</th>
+                        <th scope="col">ખાતાનું નામ અને વિગત</th>
+                        <th scope="col">રસીદ/વાઉચર નંબર</th>
+                        <th scope="col">કુલ રકમ</th>
+                        <th scope="col">જમા/ઉધાર</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cashb in cashbook %}
+
+                    <tr>
+                        <th scope="row">{{cashb.entry_no}}</th>
+                        <td>{{cashb.date | date:'SHORT_DATE_FORMAT'}}</td>
+                        <td>{{cashb.name_and_particulars}}</td>
+                        <td>    
+                            {% if cashb.voucher_no == 'None' %}
+                            {{cashb.reciept}}
+                            {% else %}
+                            {{cashb.voucher_no}}
+                            {% endif %}
+                        </td>
+                        <td>{{cashb.total_amount}}</td>
+                        <td>{{cashb.debit_or_credit}}</td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}
