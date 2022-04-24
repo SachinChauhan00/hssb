@@ -62,7 +62,6 @@ def teacher_signup(request):
         designation = request.POST.get('designation')
         contact = request.POST.get('contact')
         DOJ = request.POST.get('date')
-        teacher_code = request.POST.get('tcode')
         gender = request.POST.get('gender')
 
         # fetch and filter
@@ -72,13 +71,11 @@ def teacher_signup(request):
             messages.error(request, "This Email Is Already Used!")
         elif User_details.objects.filter(contact=contact).exists():
             messages.error(request, "This Contact Is Already Used!")
-        elif User_details.objects.filter(teacher_code=teacher_code).exists():
-            messages.error(request, "Teacher Code Already Registered")
         else:
             user = User.objects.create_user(
                 username=username, password=password, first_name=first_name, last_name=last_name, email=email)
             contact_sv = User_details.objects.create(user=user, profile_picture=profile_picture, qualification=qualification, subject=subject,
-                                                     designation=designation, contact=contact, date_of_joining=DOJ, teacher_code=teacher_code, gender=gender)
+                                                     designation=designation, contact=contact, date_of_joining=DOJ, gender=gender)
             user.save()
             contact_sv.save()
     return render(request, "teacher_signup.html", {'nav': 'active'})
@@ -147,121 +144,62 @@ def General_register(request):
     cl18 = "Note"
     cl19 = "Edit"
     cl20 = "Delete"
-    # elif request.session['lang'] == 'gu':
-    #     gr = General_Register.objects.filter(lang='gu')
-    #     cl1 = "સામાન્ય વય પત્રક નંબર"
-    #     cl2 = "વિધ્યાર્થીનું પૂરેપુરું નામ અને માતાનું નામ"
-    #     cl3 = "ધર્મ અને જાતિ"
-    #     cl4 = "જન્મ સ્થળ"
-    #     cl5 = "ખ્રિસ્તી વર્ષ અનુસાર જન્મની તારીખ, મહિનો, સાલ"
-    #     cl6 = "જન્મ તારીખ શબ્દોમાં"
-    #     cl7 = "પૂર્વ શાળા અને ધોરણ"
-    #     cl8 = "નિશાળમાં દાખલ થયાની તારીખ કે ખાતા મંજૂરી હોય તો તેની નોંધ"
-    #     cl9 = "પ્રવેશ આપવા માં આવેલ ધોરણ અને વર્ગ"
-    #     cl10 = "ફી ભરીને કે માફી"
-    #     cl11 = "શાળા છોડયાની તારીખ"
-    #     cl12 = "શાળા છોડતી વખતે ધોરણ અને વર્ગ"
-    #     cl13 = "શાળા છોડવાનું કારણ"
-    #     cl14 = "પ્રગતિ"
-    #     cl15 = "વર્તણૂક"
-    #     cl16 = "લીવીંગ સર્ટિ. આપ્યાની તારીખ"
-    #     cl17 = "નોંધ (બાકી ફી, ડુપ્લિકેટ સર્ટિ વિગેરે.)"
-    #     cl18 = "ફેરફાર કરો"
-    #     cl19 = "કાઢી નાખો"
+        
     if request.method == "POST":
-        name = "General Register ("+str(todays_date.year)+").xlxs"
-        if 'download' in request.POST:
-            if request.session['lang'] == 'en':    
+        name = "General Register.xlxs"
+        if 'yearfil' in request.POST:
+            yearfil = request.POST.get('year')
+            gr = General_Register.objects.filter(lang='en',entry_year=yearfil)
+        elif 'download' in request.POST:   
             
-                workbook = xlsxwriter.Workbook(BASE_DIR/'General Register'/name)
-                worksheet = workbook.add_worksheet()
-                worksheet.write(0, 0, "GR No.")
-                worksheet.write(0, 1, "Student Full Name")
-                worksheet.write(0, 2, "Religion And Race")
-                worksheet.write(0, 3, "Place Of Birth")
-                worksheet.write(0, 4, "Date Of Birth")
-                worksheet.write(0, 5, "Date Of Birth In Words")
-                worksheet.write(0, 6, "Previous School And Standard")
-                worksheet.write(0, 7, "Date Of School Joining")
-                worksheet.write(0, 8, "Admission Standard")
-                worksheet.write(0, 9, "Fees Or Waiver")
-                worksheet.write(0, 10, "Date Of Leaving School")
-                worksheet.write(0, 11, "Standard When Leaving School")
-                worksheet.write(0, 12, "Reason Of Leaving School")
-                worksheet.write(0, 13, "Progress")
-                worksheet.write(0, 14, "Behaviour")
-                worksheet.write(0, 15, "Date Of Taking LC")
-                worksheet.write(0, 16, "Note")
+            workbook = xlsxwriter.Workbook(BASE_DIR/'General Register'/name)
+            worksheet = workbook.add_worksheet()
+            worksheet.write(0, 0, "GR No.")
+            worksheet.write(0, 1, "Student Full Name")
+            worksheet.write(0, 2, "Mother Name")
+            worksheet.write(0, 3, "Religion And Race")
+            worksheet.write(0, 4, "Place Of Birth")
+            worksheet.write(0, 5, "Date Of Birth")
+            worksheet.write(0, 6, "Date Of Birth In Words")
+            worksheet.write(0, 7, "Previous School And Standard")
+            worksheet.write(0, 8, "Date Of School Joining")
+            worksheet.write(0, 9, "Admission Standard")
+            worksheet.write(0, 10, "Fees Or Waiver")
+            worksheet.write(0, 11, "Date Of Leaving School")
+            worksheet.write(0, 12, "Standard When Leaving School")
+            worksheet.write(0, 13, "Reason Of Leaving School")
+            worksheet.write(0, 14, "Progress")
+            worksheet.write(0, 15, "Behaviour")
+            worksheet.write(0, 16, "Date Of Taking LC")
+            worksheet.write(0, 17, "Note")
 
-                row = 1
-                col = 0
+            row = 1
+            col = 0
 
-                for record in gr:
-                    worksheet.write(row, col, record.gr_number)
-                    worksheet.write(row, col + 1, record.student_name)
-                    worksheet.write(row, col + 2, record.religion)
-                    worksheet.write(row, col + 3, record.birth_place)
-                    worksheet.write(row, col + 4, record.dob)
-                    worksheet.write(row, col + 5, record.dob_in_words)
-                    worksheet.write(row, col + 6, record.previous_school_std)
-                    worksheet.write(row, col + 7, record.school_joining)
-                    worksheet.write(row, col + 8, record.admission_std)
-                    worksheet.write(row, col + 9, record.fees)
-                    worksheet.write(row, col + 10, record.date_leaving)
-                    worksheet.write(row, col + 11, record.leaving_std)
-                    worksheet.write(row, col + 12, record.leaving_reason)
-                    worksheet.write(row, col + 13, record.progress)
-                    worksheet.write(row, col + 14, record.behaviour)
-                    worksheet.write(row, col + 15, record.date_taking_lc)
-                    worksheet.write(row, col + 16, record.note)
-                    row += 1
+            for record in gr:
+                worksheet.write(row, col, record.gr_number)
+                worksheet.write(row, col + 1, record.student_name)
+                worksheet.write(row, col + 2, record.mother_name)
+                worksheet.write(row, col + 3, record.religion)
+                worksheet.write(row, col + 4, record.birth_place)
+                worksheet.write(row, col + 5, record.dob)
+                worksheet.write(row, col + 6, record.dob_in_words)
+                worksheet.write(row, col + 7, record.previous_school_std)
+                worksheet.write(row, col + 8, record.school_joining)
+                worksheet.write(row, col + 9, record.admission_std)
+                worksheet.write(row, col + 10, record.fees)
+                worksheet.write(row, col + 11, record.date_leaving)
+                worksheet.write(row, col + 12, record.leaving_std)
+                worksheet.write(row, col + 13, record.leaving_reason)
+                worksheet.write(row, col + 14, record.progress)
+                worksheet.write(row, col + 15, record.behaviour)
+                worksheet.write(row, col + 16, record.date_taking_lc)
+                worksheet.write(row, col + 17, record.note)
+                row += 1
 
-                workbook.close()
-            elif request.session['lang'] == 'gu':    
-                workbook = xlsxwriter.Workbook(BASE_DIR/'General Register'/name)
-                worksheet = workbook.add_worksheet()
-                worksheet.write(0, 0, "સામાન્ય વય પત્રક નંબર")
-                worksheet.write(0, 1, "વિધ્યાર્થીનું પૂરેપુરું નામ અને માતાનું નામ")
-                worksheet.write(0, 2, "ધર્મ અને જાતિ")
-                worksheet.write(0, 3, "જન્મ સ્થળ")
-                worksheet.write(0, 4, "ખ્રિસ્તી વર્ષ અનુસાર જન્મની તારીખ, મહિનો, સાલ")
-                worksheet.write(0, 5, "જન્મ તારીખ શબ્દોમાં")
-                worksheet.write(0, 6, "પૂર્વ શાળા અને ધોરણ")
-                worksheet.write(0, 7, "નિશાળમાં દાખલ થયાની તારીખ કે ખાતા મંજૂરી હોય તો તેની નોંધ")
-                worksheet.write(0, 8, "પ્રવેશ આપવા માં આવેલ ધોરણ અને વર્ગ")
-                worksheet.write(0, 9, "ફી ભરીને કે માફી")
-                worksheet.write(0, 10, "શાળા છોડયાની તારીખ")
-                worksheet.write(0, 11, "શાળા છોડતી વખતે ધોરણ અને વર્ગ")
-                worksheet.write(0, 12, "શાળા છોડવાનું કારણ")
-                worksheet.write(0, 13, "પ્રગતિ")
-                worksheet.write(0, 14, "વર્તણૂક")
-                worksheet.write(0, 15, "લીવીંગ સર્ટિ. આપ્યાની તારીખ")
-                worksheet.write(0, 16, "નોંધ (બાકી ફી, ડુપ્લિકેટ સર્ટિ વિગેરે.)")
-
-                row = 1
-                col = 0
-
-                for record in gr:
-                    worksheet.write(row, col, record.gr_number)
-                    worksheet.write(row, col + 1, record.student_name)
-                    worksheet.write(row, col + 2, record.religion)
-                    worksheet.write(row, col + 3, record.birth_place)
-                    worksheet.write(row, col + 4, record.dob)
-                    worksheet.write(row, col + 5, record.dob_in_words)
-                    worksheet.write(row, col + 6, record.previous_school_std)
-                    worksheet.write(row, col + 7, record.school_joining)
-                    worksheet.write(row, col + 8, record.admission_std)
-                    worksheet.write(row, col + 9, record.fees)
-                    worksheet.write(row, col + 10, record.date_leaving)
-                    worksheet.write(row, col + 11, record.leaving_std)
-                    worksheet.write(row, col + 12, record.leaving_reason)
-                    worksheet.write(row, col + 13, record.progress)
-                    worksheet.write(row, col + 14, record.behaviour)
-                    worksheet.write(row, col + 15, record.date_taking_lc)
-                    worksheet.write(row, col + 16, record.note)
-                    row += 1
-
-                workbook.close()
+            workbook.close()
+            
+                
             
             path_to_file = os.path.join(BASE_DIR,'General Register',name)
             return FileResponse(open(path_to_file, 'rb'), as_attachment=True)
@@ -269,9 +207,94 @@ def General_register(request):
             return redirect('add_gr')
     return render(request,"general_register.html",{'gr':gr,'cl1':cl1,'cl2':cl2,'cl3':cl3,'cl4':cl4,'cl5':cl5,'cl6':cl6,'cl7':cl7,'cl8':cl8,'cl9':cl9,'cl10':cl10,'cl11':cl11,'cl12':cl12,'cl13':cl13,'cl14':cl14,'cl15':cl15,'cl16':cl16,'cl17':cl17,'cl18':cl18,'cl19':cl19,'cl20':cl20,'nav':'active'})
 
+def general_register_guj(request):
+    gr = General_Register.objects.filter(lang='gu')
+    cl1 = "સામાન્ય વય પત્રક નંબર"
+    cl2 = "વિધ્યાર્થીનું પૂરેપુરું નામ"
+    cl3 = "માતાનું નામ"
+    cl4 = "ધર્મ અને જાતિ"
+    cl5 = "જન્મ સ્થળ"
+    cl6 = "ખ્રિસ્તી વર્ષ અનુસાર જન્મની તારીખ, મહિનો, સાલ"
+    cl7 = "જન્મ તારીખ શબ્દોમાં"
+    cl8 = "પૂર્વ શાળા અને ધોરણ"
+    cl9 = "નિશાળમાં દાખલ થયાની તારીખ કે ખાતા મંજૂરી હોય તો તેની નોંધ"
+    cl10 = "પ્રવેશ આપવા માં આવેલ ધોરણ અને વર્ગ"
+    cl11 = "ફી ભરીને કે માફી"
+    cl12 = "શાળા છોડયાની તારીખ"
+    cl13 = "શાળા છોડતી વખતે ધોરણ અને વર્ગ"
+    cl14 = "શાળા છોડવાનું કારણ"
+    cl15 = "પ્રગતિ"
+    cl16 = "વર્તણૂક"
+    cl17 = "લીવીંગ સર્ટિ. આપ્યાની તારીખ"
+    cl18 = "નોંધ (બાકી ફી, ડુપ્લિકેટ સર્ટિ વિગેરે.)"
+    cl19 = "ફેરફાર કરો"
+    cl20 = "કાઢી નાખો"
+    if request.method == "POST":
+        name = "સામાન્ય વય પત્રક.xlxs"
+        if 'yearfil' in request.POST:
+            yearfil = request.POST.get('year')
+            gr = General_Register.objects.filter(lang='gu',entry_year=yearfil)
+        elif 'download' in request.POST:   
+            
+            workbook = xlsxwriter.Workbook(BASE_DIR/'General Register'/name)
+            worksheet = workbook.add_worksheet()
+            worksheet.write(0, 0, "સામાન્ય વય પત્રક નંબર")
+            worksheet.write(0, 1, "વિધ્યાર્થીનું પૂરેપુરું નામ")
+            worksheet.write(0, 2, "માતાનું નામ")
+            worksheet.write(0, 3, "ધર્મ અને જાતિ")
+            worksheet.write(0, 4, "જન્મ સ્થળ")
+            worksheet.write(0, 5, "ખ્રિસ્તી વર્ષ અનુસાર જન્મની તારીખ, મહિનો, સાલ")
+            worksheet.write(0, 6, "જન્મ તારીખ શબ્દોમાં")
+            worksheet.write(0, 7, "પૂર્વ શાળા અને ધોરણ")
+            worksheet.write(0, 8, "નિશાળમાં દાખલ થયાની તારીખ કે ખાતા મંજૂરી હોય તો તેની નોંધ")
+            worksheet.write(0, 9, "પ્રવેશ આપવા માં આવેલ ધોરણ અને વર્ગ")
+            worksheet.write(0, 10, "ફી ભરીને કે માફી")
+            worksheet.write(0, 11, "શાળા છોડયાની તારીખ")
+            worksheet.write(0, 12, "શાળા છોડતી વખતે ધોરણ અને વર્ગ")
+            worksheet.write(0, 13, "શાળા છોડવાનું કારણ")
+            worksheet.write(0, 14, "પ્રગતિ")
+            worksheet.write(0, 15, "વર્તણૂક")
+            worksheet.write(0, 16, "લીવીંગ સર્ટિ. આપ્યાની તારીખ")
+            worksheet.write(0, 17, "નોંધ (બાકી ફી, ડુપ્લિકેટ સર્ટિ વિગેરે.)")
+            row = 1
+            col = 0
+
+            for record in gr:
+                worksheet.write(row, col, record.gr_number)
+                worksheet.write(row, col + 1, record.student_name)
+                worksheet.write(row, col + 2, record.mother_name)
+                worksheet.write(row, col + 3, record.religion)
+                worksheet.write(row, col + 4, record.birth_place)
+                worksheet.write(row, col + 5, record.dob)
+                worksheet.write(row, col + 6, record.dob_in_words)
+                worksheet.write(row, col + 7, record.previous_school_std)
+                worksheet.write(row, col + 8, record.school_joining)
+                worksheet.write(row, col + 9, record.admission_std)
+                worksheet.write(row, col + 10, record.fees)
+                worksheet.write(row, col + 11, record.date_leaving)
+                worksheet.write(row, col + 12, record.leaving_std)
+                worksheet.write(row, col + 13, record.leaving_reason)
+                worksheet.write(row, col + 14, record.progress)
+                worksheet.write(row, col + 15, record.behaviour)
+                worksheet.write(row, col + 16, record.date_taking_lc)
+                worksheet.write(row, col + 17, record.note)
+                row += 1
+
+            workbook.close()
+            
+                
+            
+            path_to_file = os.path.join(BASE_DIR,'General Register',name)
+            return FileResponse(open(path_to_file, 'rb'), as_attachment=True)
+        elif 'add' in request.POST:
+            return redirect('add_gr')
+        
+    return render(request,"gr_view_guj.html",{'gr':gr,'cl1':cl1,'cl2':cl2,'cl3':cl3,'cl4':cl4,'cl5':cl5,'cl6':cl6,'cl7':cl7,'cl8':cl8,'cl9':cl9,'cl10':cl10,'cl11':cl11,'cl12':cl12,'cl13':cl13,'cl14':cl14,'cl15':cl15,'cl16':cl16,'cl17':cl17,'cl18':cl18,'cl19':cl19,'cl20':cl20,'nav':'active'})
+
 def add_gr(request):
     if request.method == "POST":
         try:
+            year = request.POST.get('year')
             gr_no = request.POST.get('gr_num')
             stud_name = request.POST.get('full_name')
             moth_name = request.POST.get('moth_name')
@@ -311,8 +334,8 @@ def add_gr(request):
             dotl_guj = request.POST.get('dotl_gu')
             note_guj = request.POST.get('note_gu')
             lang_guj = 'gu'
-            add_gr = General_Register.objects.create(gr_number=gr_no,student_name=stud_name,mother_name=moth_name,religion=religion,birth_place=birth_place,dob=dob,dob_in_words=dob_in_words,previous_school_std=previos_school_std,school_joining=dosj,admission_std=admission_std,fees=fees,date_leaving=dols,leaving_std=stdleaving,leaving_reason=leaving_reason,progress=progress,behaviour=behaviour,date_taking_lc=dotl,note=note,lang=lang)
-            add_gr_guj = General_Register.objects.create(gr_number=gr_no_guj,student_name=stud_name_guj,mother_name=moth_name_guj,religion=religion_guj,birth_place=birth_place_guj,dob=dob_guj,dob_in_words=dob_in_words_guj,previous_school_std=previos_school_std_guj,school_joining=dosj_guj,admission_std=admission_std_guj,fees=fees_guj,date_leaving=dols_guj,leaving_std=stdleaving_guj,leaving_reason=leaving_reason_guj,progress=progress_guj,behaviour=behaviour_guj,date_taking_lc=dotl_guj,note=note_guj,lang=lang_guj)
+            add_gr = General_Register.objects.create(entry_year=year,gr_number=gr_no,student_name=stud_name,mother_name=moth_name,religion=religion,birth_place=birth_place,dob=dob,dob_in_words=dob_in_words,previous_school_std=previos_school_std,school_joining=dosj,admission_std=admission_std,fees=fees,date_leaving=dols,leaving_std=stdleaving,leaving_reason=leaving_reason,progress=progress,behaviour=behaviour,date_taking_lc=dotl,note=note,lang=lang)
+            add_gr_guj = General_Register.objects.create(entry_year=year,gr_number=gr_no_guj,student_name=stud_name_guj,mother_name=moth_name_guj,religion=religion_guj,birth_place=birth_place_guj,dob=dob_guj,dob_in_words=dob_in_words_guj,previous_school_std=previos_school_std_guj,school_joining=dosj_guj,admission_std=admission_std_guj,fees=fees_guj,date_leaving=dols_guj,leaving_std=stdleaving_guj,leaving_reason=leaving_reason_guj,progress=progress_guj,behaviour=behaviour_guj,date_taking_lc=dotl_guj,note=note_guj,lang=lang_guj)
             add_gr_guj.save()
             add_gr.save()
             messages.success(request,"Entry Succesfully Inserted!")
@@ -864,9 +887,6 @@ def staff(request):
     teacher = User_details.objects.all()
     return render(request,"staff.html",{'teacher':teacher,'staff':'active'})
 
-def admission(request):
-    return render(request,"admission.html",{'stu':'active'})
-
 def qoute(request):
     if request.method == "POST":
         term = request.POST.get('term')
@@ -928,6 +948,9 @@ def view_gallery(request,id):
     images = Gallery.objects.filter(category__id=id)
     cat = Gal_Category.objects.get(pk=id)
     return render(request,"view_gallery.html",{'images':images,'category':cat})
+
+def unique(request):
+    return render(request,"unique.html",{'about':'active'})
 
 def logout(request):
     auth.logout(request)

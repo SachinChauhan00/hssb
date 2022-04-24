@@ -5,9 +5,7 @@ from pyexpat import model
 from unicodedata import category
 from django.db import models
 from django.contrib.auth.models import User
-from django.forms import CharField
-from httpx import request
-from numpy import char
+
 
 
 
@@ -21,11 +19,11 @@ class User_details(models.Model):
     designation = models.CharField(null=True, max_length=50)
     contact = models.BigIntegerField(null=False)
     date_of_joining = models.DateField(null=True)
-    teacher_code = models.BigIntegerField(null=True)
     gender = models.CharField(null=False, max_length=50)
     profile_picture = models.ImageField(upload_to='profile_pics',blank=True,null=True)
     
 class General_Register(models.Model):
+    entry_year = models.CharField(null=False, max_length=50)
     lang = models.CharField(null=False, max_length=50)
     gr_number = models.IntegerField(null=False)
     student_name = models.CharField(null=False, max_length=255)
@@ -132,5 +130,6 @@ class Gal_Category(models.Model):
 class Gallery(models.Model):
     image = models.ImageField(upload_to='gallery')
     desc = models.CharField(null=True, max_length=255)
+    css_term = models.CharField(null=False, max_length=50)
     category = models.ForeignKey(Gal_Category,on_delete=models.CASCADE)
     

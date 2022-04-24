@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-x7f-a@51*usp)f2ujh38fhy9%mpny9$4$y0$j&yg)%kak0-#_i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.43.68']
+ALLOWED_HOSTS = ['192.168.43.158']
 
 
 # Application definition
@@ -76,12 +76,9 @@ WSGI_APPLICATION = 'babarkotsite.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-   'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'babarkot',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

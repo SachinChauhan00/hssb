@@ -1,0 +1,185 @@
+{% extends 'main.html' %}
+{% block title %}
+<title>
+    Facilities | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+
+{% block content %}
+    
+<div class="container-fluid text-center bad pt-5 pb-4 shadow" >
+    <!-- START THE FEATURETTES -->
+    <p class="fs-2 fw-bold text-white"> <i class="fa-solid fa-book-open-reader"></i> શાળાની વિશેષતાઓ</p>
+    
+
+		<style>
+      .bad{
+        background: #1FA2FF;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
+      .bad:hover{
+        background: #A6FFCB;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #1FA2FF, #12D8FA, #A6FFCB);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #1FA2FF, #12D8FA, #A6FFCB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
+      .push{
+        width: 0px;
+      }
+
+    </style>
+</div>
+  
+<style>
+ .card{
+   border-radius: 20px;
+ }
+ .card:hover{
+  transition: 0.5s ease-in-out;  
+  background-color: {{request.session.color}};
+    color: white;
+    
+ }
+  @media only screen and (min-width : 1224px) {
+      .cal{
+          width: 900px;
+      }
+/* Styles */
+}
+</style>
+<div class="container mt-5">
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; વિનામુલ્યે શિક્ષણ</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; મફત પાઠ્યપુસ્તકો</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; દીકરીઓને "સરસ્વતી સાધન સહાય" યોજના અંતર્ગત સાયકલ સહાય.</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; ધોરણ 10 ના વિદ્યાર્થીઓ માટે 'પર્સનલ સ્ટુડન્ટ કાઉન્સેલિંગ'.</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; વિધ્યાર્થીઓને શિષ્યવૃતિનો લાભ.</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; વિદ્યાદીપ યોજનાનો લાભ.</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; સપ્તાહિક કસોટી અને એકમ કસોટી દ્વારા વિદ્યાર્થીઓનું સતત માર્ગદર્શન.</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; રાઉન્ડ ટેસ્ટ દ્વારા પરીક્ષાલક્ષી તૈયારી.</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; કલા ઉત્સવ, ખેલ મહાકુંભ જેવી સ્પર્ધા દ્વારા વિદ્યાર્થીના વ્યક્તિત્વ વિકાસને મહત્વ આપતી શાળા .</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; રાષ્ટ્રીય તહેવારોની ઉજવણી દ્વારા વિદ્યાર્થીના જ્ઞાનમાં વધારો.</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; માતૃ-પિતૃ પૂજન દિવસની ઉજવણી.</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; શ્રેષ્ઠ વિદ્યાર્થીઓને પ્રોત્સાહન.</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; સ્પર્ધાત્મક પરીક્ષામાં ઉતીર્ણ થયેલા
+            લાયકાત ધરાવતા, તાલીમબધ્ધ શિક્ષકો દ્વારા શિક્ષણ.</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; સ્પર્ધાત્મક પરીક્ષામાં ઉતીર્ણ થયેલા
+            લાયકાત ધરાવતા, તાલીમબધ્ધ શિક્ષકો દ્વારા શિક્ષણ.</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; સ્પર્ધાત્મક પરીક્ષામાં ઉતીર્ણ થયેલા
+            લાયકાત ધરાવતા, તાલીમબધ્ધ શિક્ષકો દ્વારા શિક્ષણ.</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; સ્પર્ધાત્મક પરીક્ષામાં ઉતીર્ણ થયેલા
+            લાયકાત ધરાવતા, તાલીમબધ્ધ શિક્ષકો દ્વારા શિક્ષણ.</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; સ્પર્ધાત્મક પરીક્ષામાં ઉતીર્ણ થયેલા
+            લાયકાત ધરાવતા, તાલીમબધ્ધ શિક્ષકો દ્વારા શિક્ષણ.</p>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-brands fa-hashnode"></i>&nbsp; સ્પર્ધાત્મક પરીક્ષામાં ઉતીર્ણ થયેલા
+            લાયકાત ધરાવતા, તાલીમબધ્ધ શિક્ષકો દ્વારા શિક્ષણ.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+<!-- <p class="fs-4 " style="color: {{request.session.color}};"><i class="bi bi-chevron-double-right"></i> શાળામાં ઉપલબ્ધ વિવિધ સુવિધાઓ :</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; ડિજિટલ સ્માર્ટબોર્ડથી દ્રશ્ય-શ્રાવ્ય માધ્યમથી જીવંત શિક્ષણ.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; સ્પર્ધાત્મક પરીક્ષામાં ઉતીર્ણ થયેલ લાયકાત ધરાવતા, તાલીમબધ્ધ થયેલા શિક્ષકો ધ્વારા શિક્ષણકાર્ય.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; વોકેશનલ એડ્યુકેશન માટે લેબની સુવિધા.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; આધુનિક કોમ્પ્યુટર લેબ.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; ગણિત વિજ્ઞાન વિષય સાધન સામગ્રી.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; શૈક્ષણિક સાધનો.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; ટ્રાન્સપોટેશનની સુવિધા.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; પુસ્તક લાઈબ્રેરી.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; રમત ગમત ના સાધનો, અને રમવા માટે મોટું મેદાન.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; પીવાના શુધ્ધ પાણીની સુવિધા.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; કુમાર,કન્યા અને દિવ્યાંગ બાળક માટે અલગ સેનિટેશનની સુવિધા.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; અભ્યાસ માટે અધ્યતન બિલ્ડીંગ અને સ્વચ્છ હવા ઉજાસ વાળા વર્ગખંડ.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; સાબુ બેન્કની સુવિધા.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; ફર્સ્ટ એઇડ કીટ.</p> -->

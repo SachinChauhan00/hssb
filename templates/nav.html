@@ -65,13 +65,13 @@ li{
                             <a href="#"
                                 class="dropdown-item dropdown-toggle fw-bold"
                                 data-bs-toggle="dropdown"
-                                data-bs-auto-close="outside">વિધ્યાર્થી સંચાલન</a>
+                                data-bs-auto-close="outside">વિદ્યાર્થી સંચાલન</a>
                             <ul class="dropdown-menu shadow bg-dark">
                                 <li>
                                     <a class="dropdown-item fw-bold" href="{% url 'attence' %}">હાજરી</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item fw-bold" href="{% url 'add_remove_st' %}">વિધ્યાર્થી ઉમેરો કે ઘટાડો</a>
+                                    <a class="dropdown-item fw-bold" href="{% url 'add_remove_st' %}">વિદ્યાર્થી ઉમેરો કે ઘટાડો</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item fw-bold" href="{% url 'viewattence' %}">હાજરી ચકાસો</a>
@@ -98,8 +98,20 @@ li{
                                 data-bs-toggle="dropdown"
                                 data-bs-auto-close="outside">વહીવટી</a>
                             <ul class="dropdown-menu shadow bg-dark">
-                                <li>
-                                    <a class="dropdown-item fw-bold" href="{% url 'gr_view' %}">સામાન્ય વય પત્રક</a>
+                                
+                                <li class="dropend">
+                                    <a href="#"
+                                        class="dropdown-item dropdown-toggle fw-bold"
+                                        data-bs-toggle="dropdown"
+                                        data-bs-auto-close="outside">સામાન્ય વાય પત્રક</a>
+                                    <ul class="dropdown-menu bg-secondary">
+                                        <li>
+                                            <a class="dropdown-item fw-bold" href="{% url 'gr_view_guj' %}">સામાન્ય વય પત્રક (ગુજરાતી)</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item fw-bold" href="{% url 'gr_view' %}">સામાન્ય વય પત્રક (ઇંગ્લિસ)</a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a class="dropdown-item fw-bold" href="{% url 'trial' %}">ટ્રાયલ સર્ટિફિકેટ</a>
@@ -188,11 +200,11 @@ li{
                     <a class="nav-link {{stu}} fw-bold dropdown-toggle"
                         href="#"
                         data-bs-toggle="dropdown"
-                        data-bs-auto-close="outside">વિધ્યાર્થી મેનૂ</a>
+                        data-bs-auto-close="outside">વિદ્યાર્થી મેનૂ</a>
                     <ul class="dropdown-menu shadow space"
                         style="background-color:{{ request.session.color }};">
                         <li>
-                            <a class="dropdown-item fw-bold" href="{% url 'admission' %}"> પ્રવેશ</a>
+                            <a class="dropdown-item fw-bold" href="https://docs.google.com/forms/d/e/1FAIpQLScDgmzPceJuoAv_q_7BOmUq86pMzo_2A7oLD0v3pS2rK1LevQ/viewform"> પ્રવેશ</a>
                         </li>
                         <li>
                             <a class="dropdown-item fw-bold" href="{% url 'notice'%}"> નોટિસબોર્ડ</a>
@@ -203,10 +215,13 @@ li{
                     </ul>
                 </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-bold {{staff}}" href="{% url 'staff'%}"> સ્ટાફ</a>
+                        <a class="nav-link fw-bold {{staff}}" href="{% url 'staff'%}"> અમારી ટીમ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-bold {{gallery}}" href="{% url 'gallery'%}"> શાળા ગેલેરી</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold" href="{% url 'notice'%}"> આચાર્યશ્રીનો સંદેશ</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link {{about}} fw-bold dropdown-toggle"
@@ -219,8 +234,9 @@ li{
                                 <a class="dropdown-item fw-bold" href="{% url 'vision' %}"> શાળાનો ધ્યેય અને મિશન</a>
                             </li>
                             <li>
-                                <a class="dropdown-item fw-bold" href="{% url 'notice'%}"> આચાર્યશ્રીનો સંદેશ</a>
+                                <a class="dropdown-item fw-bold" href="{% url 'unique' %}"> શાળાની વિશેષતાઓ</a>
                             </li>
+                            
                             <li>
                                 <a class="dropdown-item fw-bold" href="{% url 'studlink' %}">માર્ગદર્શન</a>
                             </li>

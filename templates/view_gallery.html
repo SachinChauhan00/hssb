@@ -1,25 +1,37 @@
 {% extends 'main.html' %}
 {% block title %}
-    <title>
-        View Gallery | Gov. Secondary School Babarkot
-    </title>
+<title>
+    View Gallery | Gov. Secondary School Babarkot
+</title>
 {% endblock title %}
 
 {% block content %}
-    <div class="container text-center">
-        <p class="fw-bold fs-2 mt-3" style="color: {{request.session.color}};">{{category.category}}</p>
-        <div class="row row-cols-2 g-4">
-            {% for img in images %}
-              
-            <div class="col">
-                <div class="p-2 h-100 border border-white border-4 shadow" style="background-color: {{request.session.color}};border-radius:20px;">
-                    <img src="{{img.image.url}}" class="img-fluid" alt="img-view" width="300">
-                    <p class="fw-bold text-white mt-2 fs-3">{{img.desc}}</p>
-                </div>
+<div class="container text-center">
+    <p class="fw-bold fs-2 mt-3" style="color: {{request.session.color}};">{{category.category}}</p>
+    <div class="row row-cols-1 row-cols-lg-2 align-items-stretch g-4 text-dark">
+        {% for img in images %}
+        <style>
+            .{{img.css_term}} {
+                background-image: url('{{img.image.url}}');
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            .card {
+                border-radius: 30px;
+                height: 300px;
+
+            }
+        </style>
+        <div class="col">
+            <div class="card {{img.css_term}} card-cover border border-3 border-white
+                overflow-hidden shadow">
             </div>
-            
-            {% endfor %}
+            <div class="text-sm">
+                <p class="fs-5 fw-bold mt-2" style="position: relative;">{{img.desc}}</p>
+            </div>
         </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock content %}
-    

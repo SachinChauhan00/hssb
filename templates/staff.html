@@ -9,24 +9,26 @@
 
 {% block content %}
     <div class="container text-center">
-        <p class="fs-2 mt-3 mb-3" style="color: {{request.session.color}};"><b>અમારી સંસ્થાનો સ્ટાફ</b></p>
-        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-            {% for teacher in teacher %}
-              
-            <div class="col">
-              <div class="card h-100 zoom border-light text-white bg-dark p-4 shadow" style="border-radius: 20px;">
-                <img src="{{teacher.profile_picture.url}}" class="card-img-top " alt="staff-profile" style="border-radius: 20px;">
+        <p class="fs-2 mt-3 mb-3" style="color: {{request.session.color}};"><b>શાળાનો સ્ટાફ</b></p>
+        <div class="row row-cols-1 row-cols-lg-4 g-4">
+          
+          {% for teacher in teacher %}
+                        
+          <div class="col">
+            <div class="card h-100 p-3 shadow" style="border-radius: 20px;background-color: {{request.session.color}};color:white;">
+              <!-- <img src="{{teacher.profile_picture.url}}" class="card-img-top shadow" alt="profile_pic" width="200" style="border-radius: 10px;"> -->
+              <div class="card-body fw-bold">
+                <h5 class="card-title fw-bold">{{teacher.user.first_name}} {{teacher.user.last_name}}</h5>
                 <hr>
-                <div class="card-body">
-                  <h5 class="card-title"><b>{{teacher.user.first_name}} {{teacher.user.last_name}}</b></h5>
-                  <p class="card-text"><b>({{teacher.designation}}) {{teacher.qualification}}<br>
-                    વિષય - {{teacher.subject}}<b></p>
-                </div>
+                <p class="card-text">({{teacher.designation}}) {{teacher.qualification}}
+                  <br>Subject - {{teacher.subject}}
+                </p>
               </div>
             </div>
-            
-            {% endfor %}
           </div>
+
+          {% endfor %}
+        </div>
     </div>
     <style>
       
