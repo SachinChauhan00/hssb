@@ -1,0 +1,78 @@
+{% extends 'main.html' %}
+{% block title %}
+<title>
+    View Accounts | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <p class="fw-bold fs-2 text-center mt-3" style="color: {{request.session.color}};">
+        ખાતાઓ જુઓ
+    </p>
+    <div class="p-3 shadow" style="background-color:{{request.session.color}};border-radius:15px">
+                        <div class="table-responsive">
+                            <table class="table text-light">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">વહીવટી વર્ષ</th>
+                                        <th scope="col">ખાતાનું નામ</th>
+                                        <th scope="col">ગ્રાન્ટ રજીસ્ટર</th>
+                                        <th scope="col">ચેક રજીસ્ટર</th>
+                                        <th scope="col">બિલ રજીસ્ટર</th>
+                                        <th scope="col">રોજમેળ</th>
+                                        <th scope="col">ખાતાવહી</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for gr in gr %}
+                                    <tr>
+                                        <th scope="row">{{gr.gr_number}}</th>
+                                        <td>{{gr.udise}}</td>
+                                        <td>{{gr.student_name}}</td>
+                                        <td>{{gr.mother_name}}</td>
+                                        <td>{{gr.religion}}</td>
+                                        <td>{{gr.birth_place}}</td>
+                                        <td>{{gr.dob}}</td>
+                                        <td>{{gr.dob_in_words}}</td>
+                                        <td>{{gr.previous_school_std}}</td>
+                                        <td>{{gr.school_joining}}</td>
+                                        <td>{{gr.admission_std}}</td>
+                                        <td>{{gr.fees}}</td>
+                                        <td>{{gr.date_leaving}}</td>
+                                        <td>{{gr.leaving_std}}</td>
+                                        <td>{{gr.leaving_reason}}</td>
+                                        <td>{{gr.progress}}</td>
+                                        <td>{{gr.behaviour}}</td>
+                                        <td>{{gr.date_taking_lc}}</td>
+                                        <td>{{gr.note}}</td>
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <td>
+                                                <button type="submit"
+                                                    name="edit" class="btn
+                                                    btn-light" value="{{gr.id}}"
+                                                    style="color:
+                                                    {{request.session.color}};border-radius:15px;"><i
+                                                        class="fa-solid
+                                                        fa-user-pen"></i></button>
+                                            </td>
+                                            <td>
+                                                <button type="submit"
+                                                    name="delete" class="btn
+                                                    btn-light" value="{{gr.id}}"
+                                                    style="color:
+                                                    {{request.session.color}};border-radius:15px;"><i
+                                                        class="fa-solid
+                                                        fa-user-xmark"></i></button>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endblock content %}

@@ -2,13 +2,13 @@
 
 {% block title %}
     <title>
-        About Us | Gov. Secondary School babarkot
+        Vision And Mission | Gov. Secondary School babarkot
     </title>
 {% endblock title %}
 {% block content %}
 <div class="container-fluid text-center bad pt-5 pb-4 shadow" >
     <!-- START THE FEATURETTES -->
-    <p class="fs-2 fw-bold text-white"><i class="bi bi-flower2"></i> <u>અમારી સંસ્થાનું ધ્યેય અને મિશન</u> <i class="bi bi-flower2"></i></p>
+    <p class="fs-2 fw-bold text-white"><i class="fa-solid fa-cloud-rainbow"></i> <i class="fa-solid fa-seedling"></i> શાળાનું ધ્યેય અને મિશન</p>
     
 		<style>
       .bad{
@@ -20,34 +20,30 @@
         background: #A6FFCB;  /* fallback for old browsers */
         background: -webkit-linear-gradient(to right, #1FA2FF, #12D8FA, #A6FFCB);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to right, #1FA2FF, #12D8FA, #A6FFCB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        transition: 1s ease_out;
       }
-      body,.push,.wrapper{
-        background: #16222A;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to bottom, #3A6073, #16222A);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to bottom, #3A6073, #16222A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */                      
-      }
-      .push{
-        width: 0px;
-      }
-
+      
+      
     </style>
 </div>
-<div class="container pe-5 pt-5 ps-5 pb-4 cal fw-bold back" style="border-radius: 0px 0px 0px 0px;">
-  <p class="fs-4 text-white"><i class="bi bi-chevron-double-right"></i> અમારી શાળાનું ધ્યેય :</p>
-  <p class="fs-6 text-white"><i class="bi bi-chevron-right"></i> &nbsp; વિદ્યાર્થીઓને સંવેદનશીલ વિશ્વના જવાબદાર નાગરિક બનાવવા માટે સર્વગ્રાહી શિક્ષણ આપતી શ્રેષ્ઠ શૈક્ષણિક સંસ્થા બનવું .</p>
-
-  <p class="fs-4 text-white mt-3"><i class="bi bi-chevron-double-right"></i> અમારી શાળાનું મિશન :</p>
-  <p class="fs-6 text-white" style="border-radius: 20px;"><i class="bi bi-chevron-right"></i> &nbsp; વિદ્યાર્થીઓને પોતાના જીવનમાંથી શીખવાની પ્રેરણા અને માર્ગદર્શન આપવું.</p>
-  <p class="fs-6 text-white" style="border-radius: 20px;"><i class="bi bi-chevron-right"></i> &nbsp; વિદ્યાર્થીઓ સમાજની જરૂરિયાતો પ્રત્યે સંવેદનશીલ બને એવા પ્રયત્ન કરવા.</p>
-  <p class="fs-6 text-white" style="border-radius: 20px;"><i class="bi bi-chevron-right"></i> &nbsp; વિદ્યાર્થીઓની અભિરુચિ અને અભિયોગ્યતા વિકસે તેવું વાતાવરણ પૂરું પાડવું.</p>
-  <p class="fs-6 text-white" style="border-radius: 20px;"><i class="bi bi-chevron-right"></i> &nbsp; વિદ્યાર્થીઓના વ્યક્તિત્વ વિકાસને મહત્વ આપવું. </p>
-  <p class="fs-6 text-white" style="border-radius: 20px;"><i class="bi bi-chevron-right"></i> &nbsp; વિદ્યાર્થીઓને વાસ્તવિક અનુભવો દ્વારા નૈતિકમૂલ્યોનું શિક્ષણ આપવું.</p>
-  <p class="fs-6 text-white" style="border-radius: 20px;"><i class="bi bi-chevron-right"></i> &nbsp; વિદ્યાર્થીઓમાં જીવન કૌશલ્યો વિકસાવવા.</p>
+<div class="container pe-5 pt-5 ps-5 pb-4 cal fw-bold back text-start" style="border-radius: 0px 0px 0px 0px;">
+  <div style="width: 300px;">
+  <p class="fs-4 " style="color: {{request.session.color}};"><i class="fa-solid fa-feather-pointed"></i> શાળાનું ધ્યેય :</p>
+  <p class="fs-6"><i class="fa-solid fa-right-long"></i> &nbsp; વિદ્યાર્થીઓને સંવેદનશીલ વિશ્વના જવાબદાર નાગરિક બનાવવા માટે સર્વગ્રાહી શિક્ષણ આપતી શ્રેષ્ઠ શૈક્ષણિક સંસ્થા બનવું .</p>
+  <p class="fs-6"><mark> "હું વિદ્યાર્થી, શ્રેષ્ઠ વિદ્યાર્થી, હું શિક્ષક, શ્રેષ્ઠ શિક્ષક, અમારો વર્ગખંડ, શ્રેષ્ઠ વર્ગખંડ, અમારી શાળા, શ્રેષ્ઠ શાળા"</mark></p>
+  </div>
+  <p class="fs-4 mt-3" style="color: {{request.session.color}};"><i class="fa-solid fa-feather-pointed"></i> શાળાનું મિશન :</p>
+  <p class="fs-6" style="border-radius: 20px;"><i class="fa-solid fa-right-long"></i> &nbsp; વિદ્યાર્થીઓને પોતાના જીવનમાંથી શીખવાની પ્રેરણા અને માર્ગદર્શન આપવું.</p>
+  <p class="fs-6" style="border-radius: 20px;"><i class="fa-solid fa-right-long"></i> &nbsp; વિદ્યાર્થીઓ સમાજની જરૂરિયાતો પ્રત્યે સંવેદનશીલ બને.</p>
+  <p class="fs-6" style="border-radius: 20px;"><i class="fa-solid fa-right-long"></i> &nbsp; વિદ્યાર્થીઓની અભિરુચિ અને અભિયોગ્યતા વિકસે તેવું વાતાવરણ પૂરું પાડવું.</p>
+  <p class="fs-6" style="border-radius: 20px;"><i class="fa-solid fa-right-long"></i> &nbsp; વિદ્યાર્થીઓના વ્યક્તિત્વ વિકાસને મહત્વ આપવું. </p>
+  <p class="fs-6" style="border-radius: 20px;"><i class="fa-solid fa-right-long"></i> &nbsp; વિદ્યાર્થીઓને વાસ્તવિક અનુભવો દ્વારા નૈતિકમૂલ્યોનું શિક્ષણ આપવું.</p>
+  <p class="fs-6" style="border-radius: 20px;"><i class="fa-solid fa-right-long"></i> &nbsp; વિદ્યાર્થીઓમાં જીવન કૌશલ્યો વિકસાવવા.</p>
 </div>
 <style>
   @media only screen and (min-width : 1224px) {
       .cal{
-          width: 900px;
+          width: 950px;
       }
 /* Styles */
 }

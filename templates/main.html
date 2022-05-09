@@ -1,14 +1,58 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="gu">
     <head>
-        
+
         {% block title %}
-            
+
         {% endblock title %}
-            
+
         {% include "links.html" %}
     </head>
+    <body onload="fade_alerts()" style="font-family: 'Ubuntu', sans-serif;">
+
+        {% include "nav.html" %}
+        <div class="wrapper">
+            {% block content %}
+
+            {% endblock content %}
+            <div class="push"></div>
+        </div>
+
+        {% block map %}
+
+        {% endblock map %}
+
+        {% include 'footer.html' %}
+
+    </body>
+    <script>
+        $('img').on('dragstart', function(event) { event.preventDefault(); });
+        $("body").on("contextmenu", "img", function(e) {
+        return false;
+        });
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) {
+             return false;
+            }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+             return false;
+            }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+             return false;
+            }
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+             return false;
+            }
+        
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)){
+             return false;
+            }      
+         }
+    </script>
     <style>
         html, body {
             height: 100%;
@@ -27,29 +71,19 @@
           .footer,.push {
             height: 150px;
             }
+        .dropdown-menu > li > a {
+            background-image: none;
+            color: white;
+            
+        }
+        .dropdown-menu > li > a:hover {
+            background-image: none;
+            background-color: white;
+            color: {{request.session.color}};
+        }
+        img{
+            pointer-events: none;
+        }
     </style>
-    <body onload="fade_alerts()" style="font-family: 'Ubuntu', sans-serif;">
-        {% include "nav.html" %}
-        <div class="wrapper">
-        {% block content %}
-
-        {% endblock content %}
-        <div class="push"></div>
-        </div>
-        {% include 'footer.html' %}
-    </body>
     {% include 'fadealert.html' %}
 </html>
-
-<style>
-    .dropdown-menu > li > a {
-        background-image: none;
-        color: white;
-        
-    }
-    .dropdown-menu > li > a:hover {
-        background-image: none;
-        background-color: white;
-        color: {{request.session.color}};
-    }
-</style>

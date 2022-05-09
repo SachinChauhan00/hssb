@@ -29,4 +29,6 @@ urlpatterns = [
     path('Edit-Student/<int:id>', views.edit_student, name="edit_st"),
     path('View-All-Photos/<int:id>',views.view_gallery,name='viewgallery'),
     path('Edit-Profile/<int:id>', views.edit_profile, name="editprof"),
+    path('Edit-Grant/<int:id>', views.edit_grant, name="editgrant"),
+    
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,4 +1,5 @@
 
+from email import message
 from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate, logout, login as my_login
 from django.shortcuts import render, redirect
@@ -28,9 +29,6 @@ def index(request):
 
 
 def login(request):
-    if 'lang' in request.session:
-        lang = request.session['lang']
-        print(lang)
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -48,7 +46,6 @@ def login(request):
 
 
 def teacher_signup(request):
-    role = "Teacher"
 
     if request.method == "POST":
         profile_picture = request.FILES['pp']
@@ -62,7 +59,6 @@ def teacher_signup(request):
         designation = request.POST.get('designation')
         contact = request.POST.get('contact')
         DOJ = request.POST.get('date')
-        teacher_code = request.POST.get('tcode')
         gender = request.POST.get('gender')
 
         # fetch and filter
@@ -72,13 +68,11 @@ def teacher_signup(request):
             messages.error(request, "This Email Is Already Used!")
         elif User_details.objects.filter(contact=contact).exists():
             messages.error(request, "This Contact Is Already Used!")
-        elif User_details.objects.filter(teacher_code=teacher_code).exists():
-            messages.error(request, "Teacher Code Already Registered")
         else:
             user = User.objects.create_user(
                 username=username, password=password, first_name=first_name, last_name=last_name, email=email)
             contact_sv = User_details.objects.create(user=user, profile_picture=profile_picture, qualification=qualification, subject=subject,
-                                                     designation=designation, contact=contact, date_of_joining=DOJ, teacher_code=teacher_code, gender=gender)
+                                                     designation=designation, contact=contact, date_of_joining=DOJ, gender=gender)
             user.save()
             contact_sv.save()
     return render(request, "teacher_signup.html", {'nav': 'active'})
@@ -125,153 +119,218 @@ def edit_profile(request,id):
    
 
 def General_register(request):
-  
+    yearfil = ""
+    gr_data = General_Register.objects.filter(lang='en')
     gr = General_Register.objects.filter(lang='en')
     cl1 = "GR No."
-    cl2 = "Student Full Name"
-    cl3 = "Mother Name"
-    cl4 = "Religion And Race"
-    cl5 = "Place Of Birth"
-    cl6 = "Date Of Birth"
-    cl7 = "Date Of Birth In Words"
-    cl8 = "Previous School And Standard"
-    cl9 = "Date Of School Joining"
-    cl10 = "Admission Standard"
-    cl11 = "Fees Or Waiver"
-    cl12 = "Date Of Leaving School"
-    cl13 = "Standard When Leaving School"
-    cl14 = "Reason Of Leaving School"
-    cl15 = "Progress"
-    cl16 = "Behaviour"
-    cl17 = "Date Of Taking LC"
-    cl18 = "Note"
-    cl19 = "Edit"
-    cl20 = "Delete"
-    # elif request.session['lang'] == 'gu':
-    #     gr = General_Register.objects.filter(lang='gu')
-    #     cl1 = "સામાન્ય વય પત્રક નંબર"
-    #     cl2 = "વિધ્યાર્થીનું પૂરેપુરું નામ અને માતાનું નામ"
-    #     cl3 = "ધર્મ અને જાતિ"
-    #     cl4 = "જન્મ સ્થળ"
-    #     cl5 = "ખ્રિસ્તી વર્ષ અનુસાર જન્મની તારીખ, મહિનો, સાલ"
-    #     cl6 = "જન્મ તારીખ શબ્દોમાં"
-    #     cl7 = "પૂર્વ શાળા અને ધોરણ"
-    #     cl8 = "નિશાળમાં દાખલ થયાની તારીખ કે ખાતા મંજૂરી હોય તો તેની નોંધ"
-    #     cl9 = "પ્રવેશ આપવા માં આવેલ ધોરણ અને વર્ગ"
-    #     cl10 = "ફી ભરીને કે માફી"
-    #     cl11 = "શાળા છોડયાની તારીખ"
-    #     cl12 = "શાળા છોડતી વખતે ધોરણ અને વર્ગ"
-    #     cl13 = "શાળા છોડવાનું કારણ"
-    #     cl14 = "પ્રગતિ"
-    #     cl15 = "વર્તણૂક"
-    #     cl16 = "લીવીંગ સર્ટિ. આપ્યાની તારીખ"
-    #     cl17 = "નોંધ (બાકી ફી, ડુપ્લિકેટ સર્ટિ વિગેરે.)"
-    #     cl18 = "ફેરફાર કરો"
-    #     cl19 = "કાઢી નાખો"
+    cl2 = "UDISE No."
+    cl3 = "Student Full Name"
+    cl4 = "Mother Name"
+    cl5 = "Religion And Race"
+    cl6 = "Place Of Birth"
+    cl7 = "Date Of Birth"
+    cl8 = "Date Of Birth In Words"
+    cl9 = "Previous School And Standard"
+    cl10 = "Date Of School Joining"
+    cl11 = "Admission Standard"
+    cl12 = "Fees Or Waiver"
+    cl13 = "Date Of Leaving School"
+    cl14 = "Standard When Leaving School"
+    cl15 = "Reason Of Leaving School"
+    cl16 = "Progress"
+    cl17 = "Behaviour"
+    cl18 = "Date Of Taking LC"
+    cl19 = "Note"
+    cl20 = "Edit"
+    cl21 = "Delete"
+        
     if request.method == "POST":
-        name = "General Register ("+str(todays_date.year)+").xlxs"
-        if 'download' in request.POST:
-            if request.session['lang'] == 'en':    
+        name = "General Register.xlxs"
+        if 'yearfil' in request.POST:
+            yearfil = request.POST.get('year')
+            gr = General_Register.objects.filter(lang='en',entry_year=yearfil)
+        if 'download' in request.POST:   
+            workbook = xlsxwriter.Workbook(BASE_DIR/'General Register'/name)
+            worksheet = workbook.add_worksheet()
+            worksheet.write(0, 0, "GR No.")
+            worksheet.write(0, 1, "UDISE No.")
+            worksheet.write(0, 2, "Student Full Name")
+            worksheet.write(0, 3, "Mother Name")
+            worksheet.write(0, 4, "Religion And Race")
+            worksheet.write(0, 5, "Place Of Birth")
+            worksheet.write(0, 6, "Date Of Birth")
+            worksheet.write(0, 7, "Date Of Birth In Words")
+            worksheet.write(0, 8, "Previous School And Standard")
+            worksheet.write(0, 9, "Date Of School Joining")
+            worksheet.write(0, 10, "Admission Standard")
+            worksheet.write(0, 11, "Fees Or Waiver")
+            worksheet.write(0, 12, "Date Of Leaving School")
+            worksheet.write(0, 13, "Standard When Leaving School")
+            worksheet.write(0, 14, "Reason Of Leaving School")
+            worksheet.write(0, 15, "Progress")
+            worksheet.write(0, 16, "Behaviour")
+            worksheet.write(0, 17, "Date Of Taking LC")
+            worksheet.write(0, 18, "Note")
+
+            row = 1
+            col = 0
+
+            for record in gr:
+                worksheet.write(row, col, record.gr_number)
+                worksheet.write(row, col + 1, record.udise)
+                worksheet.write(row, col + 2, record.student_name)
+                worksheet.write(row, col + 3, record.mother_name)
+                worksheet.write(row, col + 4, record.religion)
+                worksheet.write(row, col + 5, record.birth_place)
+                worksheet.write(row, col + 6, record.dob)
+                worksheet.write(row, col + 7, record.dob_in_words)
+                worksheet.write(row, col + 8, record.previous_school_std)
+                worksheet.write(row, col + 9, record.school_joining)
+                worksheet.write(row, col + 10, record.admission_std)
+                worksheet.write(row, col + 11, record.fees)
+                worksheet.write(row, col + 12, record.date_leaving)
+                worksheet.write(row, col + 13, record.leaving_std)
+                worksheet.write(row, col + 14, record.leaving_reason)
+                worksheet.write(row, col + 15, record.progress)
+                worksheet.write(row, col + 16, record.behaviour)
+                worksheet.write(row, col + 17, record.date_taking_lc)
+                worksheet.write(row, col + 18, record.note)
+                row += 1
+
+            workbook.close()
             
-                workbook = xlsxwriter.Workbook(BASE_DIR/'General Register'/name)
-                worksheet = workbook.add_worksheet()
-                worksheet.write(0, 0, "GR No.")
-                worksheet.write(0, 1, "Student Full Name")
-                worksheet.write(0, 2, "Religion And Race")
-                worksheet.write(0, 3, "Place Of Birth")
-                worksheet.write(0, 4, "Date Of Birth")
-                worksheet.write(0, 5, "Date Of Birth In Words")
-                worksheet.write(0, 6, "Previous School And Standard")
-                worksheet.write(0, 7, "Date Of School Joining")
-                worksheet.write(0, 8, "Admission Standard")
-                worksheet.write(0, 9, "Fees Or Waiver")
-                worksheet.write(0, 10, "Date Of Leaving School")
-                worksheet.write(0, 11, "Standard When Leaving School")
-                worksheet.write(0, 12, "Reason Of Leaving School")
-                worksheet.write(0, 13, "Progress")
-                worksheet.write(0, 14, "Behaviour")
-                worksheet.write(0, 15, "Date Of Taking LC")
-                worksheet.write(0, 16, "Note")
-
-                row = 1
-                col = 0
-
-                for record in gr:
-                    worksheet.write(row, col, record.gr_number)
-                    worksheet.write(row, col + 1, record.student_name)
-                    worksheet.write(row, col + 2, record.religion)
-                    worksheet.write(row, col + 3, record.birth_place)
-                    worksheet.write(row, col + 4, record.dob)
-                    worksheet.write(row, col + 5, record.dob_in_words)
-                    worksheet.write(row, col + 6, record.previous_school_std)
-                    worksheet.write(row, col + 7, record.school_joining)
-                    worksheet.write(row, col + 8, record.admission_std)
-                    worksheet.write(row, col + 9, record.fees)
-                    worksheet.write(row, col + 10, record.date_leaving)
-                    worksheet.write(row, col + 11, record.leaving_std)
-                    worksheet.write(row, col + 12, record.leaving_reason)
-                    worksheet.write(row, col + 13, record.progress)
-                    worksheet.write(row, col + 14, record.behaviour)
-                    worksheet.write(row, col + 15, record.date_taking_lc)
-                    worksheet.write(row, col + 16, record.note)
-                    row += 1
-
-                workbook.close()
-            elif request.session['lang'] == 'gu':    
-                workbook = xlsxwriter.Workbook(BASE_DIR/'General Register'/name)
-                worksheet = workbook.add_worksheet()
-                worksheet.write(0, 0, "સામાન્ય વય પત્રક નંબર")
-                worksheet.write(0, 1, "વિધ્યાર્થીનું પૂરેપુરું નામ અને માતાનું નામ")
-                worksheet.write(0, 2, "ધર્મ અને જાતિ")
-                worksheet.write(0, 3, "જન્મ સ્થળ")
-                worksheet.write(0, 4, "ખ્રિસ્તી વર્ષ અનુસાર જન્મની તારીખ, મહિનો, સાલ")
-                worksheet.write(0, 5, "જન્મ તારીખ શબ્દોમાં")
-                worksheet.write(0, 6, "પૂર્વ શાળા અને ધોરણ")
-                worksheet.write(0, 7, "નિશાળમાં દાખલ થયાની તારીખ કે ખાતા મંજૂરી હોય તો તેની નોંધ")
-                worksheet.write(0, 8, "પ્રવેશ આપવા માં આવેલ ધોરણ અને વર્ગ")
-                worksheet.write(0, 9, "ફી ભરીને કે માફી")
-                worksheet.write(0, 10, "શાળા છોડયાની તારીખ")
-                worksheet.write(0, 11, "શાળા છોડતી વખતે ધોરણ અને વર્ગ")
-                worksheet.write(0, 12, "શાળા છોડવાનું કારણ")
-                worksheet.write(0, 13, "પ્રગતિ")
-                worksheet.write(0, 14, "વર્તણૂક")
-                worksheet.write(0, 15, "લીવીંગ સર્ટિ. આપ્યાની તારીખ")
-                worksheet.write(0, 16, "નોંધ (બાકી ફી, ડુપ્લિકેટ સર્ટિ વિગેરે.)")
-
-                row = 1
-                col = 0
-
-                for record in gr:
-                    worksheet.write(row, col, record.gr_number)
-                    worksheet.write(row, col + 1, record.student_name)
-                    worksheet.write(row, col + 2, record.religion)
-                    worksheet.write(row, col + 3, record.birth_place)
-                    worksheet.write(row, col + 4, record.dob)
-                    worksheet.write(row, col + 5, record.dob_in_words)
-                    worksheet.write(row, col + 6, record.previous_school_std)
-                    worksheet.write(row, col + 7, record.school_joining)
-                    worksheet.write(row, col + 8, record.admission_std)
-                    worksheet.write(row, col + 9, record.fees)
-                    worksheet.write(row, col + 10, record.date_leaving)
-                    worksheet.write(row, col + 11, record.leaving_std)
-                    worksheet.write(row, col + 12, record.leaving_reason)
-                    worksheet.write(row, col + 13, record.progress)
-                    worksheet.write(row, col + 14, record.behaviour)
-                    worksheet.write(row, col + 15, record.date_taking_lc)
-                    worksheet.write(row, col + 16, record.note)
-                    row += 1
-
-                workbook.close()
+                
             
             path_to_file = os.path.join(BASE_DIR,'General Register',name)
             return FileResponse(open(path_to_file, 'rb'), as_attachment=True)
         elif 'add' in request.POST:
             return redirect('add_gr')
-    return render(request,"general_register.html",{'gr':gr,'cl1':cl1,'cl2':cl2,'cl3':cl3,'cl4':cl4,'cl5':cl5,'cl6':cl6,'cl7':cl7,'cl8':cl8,'cl9':cl9,'cl10':cl10,'cl11':cl11,'cl12':cl12,'cl13':cl13,'cl14':cl14,'cl15':cl15,'cl16':cl16,'cl17':cl17,'cl18':cl18,'cl19':cl19,'cl20':cl20,'nav':'active'})
+        elif 'edit' in request.POST:
+            pass
+        elif 'delete' in request.POST:
+            delid = request.POST.get('delete')
+            deldata = General_Register.objects.get(pk=delid)
+            deldata_log = General_Register.objects.filter(gr_number=deldata.gr_number).delete()
+            messages.success(request,"Student Deleted Successfully!")
+        elif 'udisefil' in request.POST:
+            udise = request.POST.get('UDISE')
+            gr = General_Register.objects.filter(lang='en',udise=udise)
+        elif 'namefil' in request.POST:
+            name = request.POST.get('name')
+            gr = General_Register.objects.filter(lang='en',student_name=name)
+        elif 'grfil' in request.POST:
+            grno = request.POST.get('gr')
+            gr = General_Register.objects.filter(lang='en',gr_number=grno)                   
+    return render(request,"general_register.html",{'gr':gr,'cl1':cl1,'cl2':cl2,'cl3':cl3,'cl4':cl4,'cl5':cl5,'cl6':cl6,'cl7':cl7,'cl8':cl8,'cl9':cl9,'cl10':cl10,'cl11':cl11,'cl12':cl12,'cl13':cl13,'cl14':cl14,'cl15':cl15,'cl16':cl16,'cl17':cl17,'cl18':cl18,'cl19':cl19,'cl20':cl20,'cl21':cl21,'nav':'active','gr_data':gr_data})
+
+def general_register_guj(request):
+    gr_data = General_Register.objects.filter(lang='gu')
+    gr = General_Register.objects.filter(lang='gu')
+    cl1 = "સામાન્ય વય પત્રક નંબર"
+    cl2 = "યુડાયસ નંબર"
+    cl3 = "વિધ્યાર્થીનું પૂરેપુરું નામ"
+    cl4 = "માતાનું નામ"
+    cl5 = "ધર્મ અને જાતિ"
+    cl6 = "જન્મ સ્થળ"
+    cl7 = "ખ્રિસ્તી વર્ષ અનુસાર જન્મની તારીખ, મહિનો, સાલ"
+    cl8 = "જન્મ તારીખ શબ્દોમાં"
+    cl9 = "પૂર્વ શાળા અને ધોરણ"
+    cl10 = "નિશાળમાં દાખલ થયાની તારીખ કે ખાતા મંજૂરી હોય તો તેની નોંધ"
+    cl11 = "પ્રવેશ આપવા માં આવેલ ધોરણ અને વર્ગ"
+    cl12 = "ફી ભરીને કે માફી"
+    cl13 = "શાળા છોડયાની તારીખ"
+    cl14 = "શાળા છોડતી વખતે ધોરણ અને વર્ગ"
+    cl15 = "શાળા છોડવાનું કારણ"
+    cl16 = "પ્રગતિ"
+    cl17 = "વર્તણૂક"
+    cl18 = "લીવીંગ સર્ટિ. આપ્યાની તારીખ"
+    cl19 = "નોંધ (બાકી ફી, ડુપ્લિકેટ સર્ટિ વિગેરે.)"
+    cl20 = "ફેરફાર કરો"
+    cl21 = "કાઢી નાખો"
+    if request.method == "POST":
+        name = "સામાન્ય વય પત્રક.xlxs"
+        if 'yearfil' in request.POST:
+            yearfil = request.POST.get('year')
+            gr = General_Register.objects.filter(lang='gu',entry_year=yearfil)
+        elif 'download' in request.POST:   
+            
+            workbook = xlsxwriter.Workbook(BASE_DIR/'General Register'/name)
+            worksheet = workbook.add_worksheet()
+            worksheet.write(0, 0, "સામાન્ય વય પત્રક નંબર")
+            worksheet.write(0, 1, "યુડાયસ નંબર")
+            worksheet.write(0, 2, "વિધ્યાર્થીનું પૂરેપુરું નામ")
+            worksheet.write(0, 3, "માતાનું નામ")
+            worksheet.write(0, 4, "ધર્મ અને જાતિ")
+            worksheet.write(0, 5, "જન્મ સ્થળ")
+            worksheet.write(0, 6, "ખ્રિસ્તી વર્ષ અનુસાર જન્મની તારીખ, મહિનો, સાલ")
+            worksheet.write(0, 7, "જન્મ તારીખ શબ્દોમાં")
+            worksheet.write(0, 8, "પૂર્વ શાળા અને ધોરણ")
+            worksheet.write(0, 9, "નિશાળમાં દાખલ થયાની તારીખ કે ખાતા મંજૂરી હોય તો તેની નોંધ")
+            worksheet.write(0, 10, "પ્રવેશ આપવા માં આવેલ ધોરણ અને વર્ગ")
+            worksheet.write(0, 11, "ફી ભરીને કે માફી")
+            worksheet.write(0, 12, "શાળા છોડયાની તારીખ")
+            worksheet.write(0, 13, "શાળા છોડતી વખતે ધોરણ અને વર્ગ")
+            worksheet.write(0, 14, "શાળા છોડવાનું કારણ")
+            worksheet.write(0, 15, "પ્રગતિ")
+            worksheet.write(0, 16, "વર્તણૂક")
+            worksheet.write(0, 17, "લીવીંગ સર્ટિ. આપ્યાની તારીખ")
+            worksheet.write(0, 18, "નોંધ (બાકી ફી, ડુપ્લિકેટ સર્ટિ વિગેરે.)")
+            row = 1
+            col = 0
+
+            for record in gr:
+                worksheet.write(row, col, record.gr_number)
+                worksheet.write(row, col + 1, record.udise)
+                worksheet.write(row, col + 2, record.student_name)
+                worksheet.write(row, col + 3, record.mother_name)
+                worksheet.write(row, col + 4, record.religion)
+                worksheet.write(row, col + 5, record.birth_place)
+                worksheet.write(row, col + 6, record.dob)
+                worksheet.write(row, col + 7, record.dob_in_words)
+                worksheet.write(row, col + 8, record.previous_school_std)
+                worksheet.write(row, col + 9, record.school_joining)
+                worksheet.write(row, col + 10, record.admission_std)
+                worksheet.write(row, col + 11, record.fees)
+                worksheet.write(row, col + 12, record.date_leaving)
+                worksheet.write(row, col + 13, record.leaving_std)
+                worksheet.write(row, col + 14, record.leaving_reason)
+                worksheet.write(row, col + 15, record.progress)
+                worksheet.write(row, col + 16, record.behaviour)
+                worksheet.write(row, col + 17, record.date_taking_lc)
+                worksheet.write(row, col + 18, record.note)
+                row += 1
+
+            workbook.close()
+            
+                
+            
+            path_to_file = os.path.join(BASE_DIR,'General Register',name)
+            return FileResponse(open(path_to_file, 'rb'), as_attachment=True)
+        elif 'add' in request.POST:
+            return redirect('add_gr')
+        elif 'edit' in request.POST:
+            pass
+        elif 'delete' in request.POST:
+            delid = request.POST.get('delete')
+            deldata = General_Register.objects.get(pk=delid)
+            deldata_log = General_Register.objects.filter(gr_number=deldata.gr_number).delete()
+            messages.success(request,"Student Deleted Successfully!")
+        elif 'udisefil' in request.POST:
+            udise_no = request.POST.get('UDISE')
+            gr = General_Register.objects.filter(lang='gu',udise=udise_no)
+        elif 'namefil' in request.POST:
+            name = request.POST.get('name')
+            gr = General_Register.objects.filter(lang='gu',student_name=name)
+        elif 'grfil' in request.POST:
+            grno = request.POST.get('gr')
+            gr = General_Register.objects.filter(lang='gu',gr_number=grno)
+        
+    return render(request,"gr_view_guj.html",{'gr':gr,'cl1':cl1,'cl2':cl2,'cl3':cl3,'cl4':cl4,'cl5':cl5,'cl6':cl6,'cl7':cl7,'cl8':cl8,'cl9':cl9,'cl10':cl10,'cl11':cl11,'cl12':cl12,'cl13':cl13,'cl14':cl14,'cl15':cl15,'cl16':cl16,'cl17':cl17,'cl18':cl18,'cl19':cl19,'cl20':cl20,'cl21':cl21,'nav':'active','gr_data':gr_data})
 
 def add_gr(request):
     if request.method == "POST":
         try:
+            year = request.POST.get('year')
             gr_no = request.POST.get('gr_num')
             stud_name = request.POST.get('full_name')
             moth_name = request.POST.get('moth_name')
@@ -311,12 +370,15 @@ def add_gr(request):
             dotl_guj = request.POST.get('dotl_gu')
             note_guj = request.POST.get('note_gu')
             lang_guj = 'gu'
-            add_gr = General_Register.objects.create(gr_number=gr_no,student_name=stud_name,mother_name=moth_name,religion=religion,birth_place=birth_place,dob=dob,dob_in_words=dob_in_words,previous_school_std=previos_school_std,school_joining=dosj,admission_std=admission_std,fees=fees,date_leaving=dols,leaving_std=stdleaving,leaving_reason=leaving_reason,progress=progress,behaviour=behaviour,date_taking_lc=dotl,note=note,lang=lang)
-            add_gr_guj = General_Register.objects.create(gr_number=gr_no_guj,student_name=stud_name_guj,mother_name=moth_name_guj,religion=religion_guj,birth_place=birth_place_guj,dob=dob_guj,dob_in_words=dob_in_words_guj,previous_school_std=previos_school_std_guj,school_joining=dosj_guj,admission_std=admission_std_guj,fees=fees_guj,date_leaving=dols_guj,leaving_std=stdleaving_guj,leaving_reason=leaving_reason_guj,progress=progress_guj,behaviour=behaviour_guj,date_taking_lc=dotl_guj,note=note_guj,lang=lang_guj)
-            add_gr_guj.save()
-            add_gr.save()
-            messages.success(request,"Entry Succesfully Inserted!")
-            return redirect('gr_view')
+            if General_Register.objects.filter(gr_number=gr_no).exists():
+                messages.error(request,"GR Number Already Exists !")
+            else:
+                add_gr = General_Register.objects.create(entry_year=year,gr_number=gr_no,student_name=stud_name,mother_name=moth_name,religion=religion,birth_place=birth_place,dob=dob,dob_in_words=dob_in_words,previous_school_std=previos_school_std,school_joining=dosj,admission_std=admission_std,fees=fees,date_leaving=dols,leaving_std=stdleaving,leaving_reason=leaving_reason,progress=progress,behaviour=behaviour,date_taking_lc=dotl,note=note,lang=lang)
+                add_gr_guj = General_Register.objects.create(entry_year=year,gr_number=gr_no_guj,student_name=stud_name_guj,mother_name=moth_name_guj,religion=religion_guj,birth_place=birth_place_guj,dob=dob_guj,dob_in_words=dob_in_words_guj,previous_school_std=previos_school_std_guj,school_joining=dosj_guj,admission_std=admission_std_guj,fees=fees_guj,date_leaving=dols_guj,leaving_std=stdleaving_guj,leaving_reason=leaving_reason_guj,progress=progress_guj,behaviour=behaviour_guj,date_taking_lc=dotl_guj,note=note_guj,lang=lang_guj)
+                add_gr_guj.save()
+                add_gr.save()
+                messages.success(request,"Entry Succesfully Inserted!")
+                return redirect('gr_view')
         except:
             messages.error(request,"Something Went Wrong!")
     return render(request,"add_gr.html",{'nav':'active'})
@@ -332,6 +394,13 @@ def add_keywords(request):
 
 def trail_cert(request):
     trial_student_list = General_Register.objects.filter(lang='en')
+    if request.method == "POST":
+        if 'namefil' in request.POST:
+            name = request.POST.get('name')
+            trial_student_list = General_Register.objects.filter(lang='en',student_name=name)
+        elif 'grfil' in request.POST:
+            grno = request.POST.get('grno')
+            trial_student_list = General_Register.objects.filter(lang='en',gr_number=grno)
     return render(request, "trial_certificate.html",{'list':trial_student_list,'nav':'active'})
 
 
@@ -374,6 +443,13 @@ def gen_trial(request,id):
 
 def bonafide(request):
     bonafide_student_list = General_Register.objects.filter(lang='en')
+    if request.method == "POST":
+        if 'namefil' in request.POST:
+            name = request.POST.get('name')
+            bonafide_student_list = General_Register.objects.filter(lang='en',student_name=name)
+        elif 'grfil' in request.POST:
+            grno = request.POST.get('grno')
+            bonafide_student_list = General_Register.objects.filter(lang='en',gr_number=grno)
     return render(request,"bonafide.html",{'list':bonafide_student_list,'nav':'active'})
 
 def gen_bonafide(request,id):
@@ -403,6 +479,13 @@ def gen_bonafide(request,id):
 
 def birth(request):
     birth_student_list = General_Register.objects.filter(lang='en')
+    if request.method == "POST":
+        if 'namefil' in request.POST:
+            name = request.POST.get('name')
+            birth_student_list = General_Register.objects.filter(lang='en',student_name=name)
+        elif 'grfil' in request.POST:
+            grno = request.POST.get('grno')
+            birth_student_list = General_Register.objects.filter(lang='en',gr_number=grno)
     return render(request,"birth.html",{'list':birth_student_list,'nav':'active'})
 
 def gen_birth(request,id):
@@ -472,24 +555,33 @@ def grant_reg(request):
             path_to_file = os.path.join(BASE_DIR,'Grant Register',name)
             return FileResponse(open(path_to_file, 'rb'), as_attachment=True)
         elif 'edit' in request.POST:
-            pass
+            editid = request.POST.get('edit')
+            return redirect('editgrant',id=editid)
         elif 'delete' in request.POST:
             del_id = request.POST.get('delete')
             delete_grant = Grant_Register.objects.filter(pk = del_id).delete()
+        
     return render(request,"grant_reg.html",{'grant':grant})
 
 def add_grant(request):
+    khatu = Account_Model.objects.all()
     if request.method == "POST":
-        entry_no = request.POST.get('enno')
-        grant_det = request.POST.get('grantdet')
-        amount = request.POST.get('amount')
-        order_no = request.POST.get('odno')
-        deposite_date = request.POST.get('deposite_date')
-        remarks = request.POST.get('remarks')
-        grant_entry = Grant_Register.objects.create(entry_no=entry_no,grant_details=grant_det,amount=amount,order_no=order_no,bank_deposite_date=deposite_date,remarks=remarks)
-        grant_entry.save()
+        try:
+            accountid = request.POST.get('account')
+            account = Account_Model.objects.get(pk=accountid)
+            entry_no = request.POST.get('enno')
+            grant_det = request.POST.get('grantdet')
+            amount = request.POST.get('amount')
+            order_no = request.POST.get('odno')
+            deposite_date = request.POST.get('deposite_date')
+            remarks = request.POST.get('remarks')
+            grant_entry = Grant_Register.objects.create(account=account,entry_no=entry_no,grant_details=grant_det,amount=amount,order_no=order_no,bank_deposite_date=deposite_date,remarks=remarks)
+            grant_entry.save()
+            messages.success(request,"Grant Added Successfully!")
+        except:
+            messages.error(request,"Something Went Wrong!")
         return redirect('grant')
-    return render(request,"add_grant.html")
+    return render(request,"add_grant.html",{'acc':khatu})
 
 def account_list(request):
     users = User.objects.filter(is_superuser=0)
@@ -515,7 +607,8 @@ def general_ledger(request):
             workbook = xlsxwriter.Workbook(BASE_DIR/'General Ledger'/name)
             worksheet = workbook.add_worksheet()
             worksheet.write(0, 0, "એન્ટ્રી નં.")
-            worksheet.write(0, 1, "તારીખ")
+            
+            
             worksheet.write(0, 2, "વિગત")
             worksheet.write(0, 3, "રોજમેળ સંદર્ભ")
             worksheet.write(0, 4, "જમા રુપિયા/પૈસા")
@@ -544,45 +637,65 @@ def general_ledger(request):
     return render(request,"general_ledger.html",{'ledgerdet':gledger})
 
 def ledger_entry(request):
+    khatu = Account_Model.objects.all()
     if request.method =="POST":
-        ccentry = request.POST.get('ccentry')
-        ccdate = request.POST.get('ccdate')
-        ccnameandperticulars = request.POST.get('ccnameandperticulars')
-        ccreciept = request.POST.get('ccreciept')
-        cctotal = request.POST.get('cctotal')
-        cc = "જમા"
+        try:
+            accountid = request.POST.get('account')
+            account = Account_Model.objects.get(pk=accountid)
+            glentry = request.POST.get('glentry')
+            gldate = request.POST.get('gldate')
+            glperticular = request.POST.get('glperticulars')
+            gldeposite = request.POST.get('gldeposite')
+            glcredit = request.POST.get('glcredit')
+            glleftdeposite = request.POST.get('glleftdeposite')
+            glleftcredit = request.POST.get('glleftcredit')
+            gledger = General_Ledger.objects.create(account=account,entry_no=glentry,date=gldate,particulars=glperticular,credit=glcredit,debit=gldeposite,credit_bal=glleftcredit,debit_bal=glleftdeposite)
+            gledger.save()
+            messages.success(request,"Ledger Entry Inserted Successfully!")
+        except:
+            messages.error(request,"Something Went Wrong!")
         
-        cdentry = request.POST.get('cdentry')
-        cddate = request.POST.get('cddate')
-        cdnameandperticulars = request.POST.get('cdnameandperticulars')
-        cdvoucher = request.POST.get('cdvoucher')
-        cdtotal = request.POST.get('cdtotal')
-        cd = "ઉધાર"
+    return render(request,"ledgerentry.html",{'acc':khatu})
+
+def cashbookentry(request):
+    khatu = Account_Model.objects.all()
+    ledger = General_Ledger.objects.all()
+    if request.method =="POST":
+        try:
+            accountid = request.POST.get('account')
+            ledg = request.POST.get('ledg')
+            ledger = General_Ledger.objects.get(pk=ledg)
+            account = Account_Model.objects.get(pk=accountid)
+            ccentry = request.POST.get('ccentry')
+            ccdate = request.POST.get('ccdate')
+            ccnameandperticulars = request.POST.get('ccnameandperticulars')
+            ccreciept = request.POST.get('ccreciept')
+            cctotal = request.POST.get('cctotal')
+            cc = "જમા"
+            
+            cdentry = request.POST.get('cdentry')
+            cddate = request.POST.get('cddate')
+            cdnameandperticulars = request.POST.get('cdnameandperticulars')
+            cdvoucher = request.POST.get('cdvoucher')
+            cdtotal = request.POST.get('cdtotal')
+            cd = "ઉધાર"
+            cashc = Cash_Book.objects.create(entry_no=ccentry,ledger=ledger,account=account,date=ccdate,name_and_particulars=ccnameandperticulars,reciept=ccreciept,total_amount=cctotal,debit_or_credit=cc)
+            cashc.save()
+            cashd = Cash_Book.objects.create(entry_no=cdentry,ledger=ledger,account=account,date=cddate,name_and_particulars=cdnameandperticulars,voucher_no=cdvoucher,total_amount=cdtotal,debit_or_credit=cd)
+            cashd.save()
+            messages.success(request,"CashBook Entry Inserted Successfully")
+            return redirect('cashbook')
         
-        glentry = request.POST.get('glentry')
-        gldate = request.POST.get('gldate')
-        glperticular = request.POST.get('glperticulars')
-        gldeposite = request.POST.get('gldeposite')
-        glcredit = request.POST.get('glcredit')
-        glleftdeposite = request.POST.get('glleftdeposite')
-        glleftcredit = request.POST.get('glleftcredit')
-        glaccount = request.POST.get('glaccount')
-        
-        cashc = Cash_Book.objects.create(entry_no=ccentry,date=ccdate,name_and_particulars=ccnameandperticulars,reciept=ccreciept,total_amount=cctotal,debit_or_credit=cc)
-        cashc.save()
-        cashd = Cash_Book.objects.create(entry_no=cdentry,date=cddate,name_and_particulars=cdnameandperticulars,voucher_no=cdvoucher,total_amount=cdtotal,debit_or_credit=cd)
-        cashd.save()
-        gledger = General_Ledger.objects.create(entry_no=glentry,date=gldate,particulars=glperticular,c_b_r_no=cashc,credit=glcredit,debit=gldeposite,credit_bal=glleftcredit,debit_bal=glleftdeposite,name_of_account=glaccount)
-        gledger.save()
-        
-    return render(request,"ledger_cash_book_entry.html")
+        except:
+            messages.error(request,"Something Went Wrong!")
+    return render(request,"cashbookentry.html",{'acc':khatu, 'gen':ledger})
 
 def cashbook(request):
     cashbook = Cash_Book.objects.all()
     name = "Cash-Book.xlxs"
     if request.method == "POST":
         if 'add-entry' in request.POST:
-            return redirect('ledger_entry')
+            return redirect('cashbook_entry')
         if 'export' in request.POST:
             workbook = xlsxwriter.Workbook(BASE_DIR/'Cash Book'/name)
             worksheet = workbook.add_worksheet()
@@ -612,7 +725,7 @@ def cashbook(request):
     return render(request,"cashbook.html",{'cashbook':cashbook})
     
 def cashbook_filter(request,id):
-    filtered = Cash_Book.objects.filter(entry_no=id)
+    filtered = Cash_Book.objects.filter(ledger__id=id)
     return render(request,"cashbook_filter.html",{'cashbook':filtered})
 
 def cheque_register(request):
@@ -657,20 +770,28 @@ def cheque_register(request):
     return render(request,"cheque_reg.html",{'cheque_reg':details})
     
 def cheque_register_add(request):
+    khatu = Account_Model.objects.all()
+    
     if request.method == "POST":
-        entryno = request.POST.get('enno')
-        date = request.POST.get('date')
-        agency_name = request.POST.get('agname')
-        purchase_det = request.POST.get('purchase_detail')
-        billno = request.POST.get('billno')
-        chequeno = request.POST.get('chequeno')
-        chequedate = request.POST.get('chequedate')
-        amount = request.POST.get('amount')
-        payableamount = request.POST.get('payableamount')
-        newentry = Cheque_Register.objects.create(entry_no=entryno,date=date,agency_name=agency_name,purchase_detail=purchase_det,bill_no=billno,cheque_no=chequeno,cheque_date=chequedate,amount=amount,paying_amount=payableamount)
-        newentry.save()
-        return redirect('cheque_reg')
-    return render(request,"cheque_reg_add.html")
+        try:
+            accountid = request.POST.get('account')
+            account = Account_Model.objects.get(pk=accountid)
+            entryno = request.POST.get('enno')
+            date = request.POST.get('date')
+            agency_name = request.POST.get('agname')
+            purchase_det = request.POST.get('purchase_detail')
+            billno = request.POST.get('billno')
+            chequeno = request.POST.get('chequeno')
+            chequedate = request.POST.get('chequedate')
+            amount = request.POST.get('amount')
+            payableamount = request.POST.get('payableamount')
+            newentry = Cheque_Register.objects.create(account=account,entry_no=entryno,date=date,agency_name=agency_name,purchase_detail=purchase_det,bill_no=billno,cheque_no=chequeno,cheque_date=chequedate,amount=amount,paying_amount=payableamount)
+            newentry.save()
+            messages.success(request,"Cheque Added Successfully!")
+            return redirect('cheque_reg')
+        except:
+            messages.error(request,"Something Went Wrong!")
+    return render(request,"cheque_reg_add.html",{'acc':khatu})
 
 def bill_book(request):
     bill_book = Bill_Book.objects.all()
@@ -864,9 +985,6 @@ def staff(request):
     teacher = User_details.objects.all()
     return render(request,"staff.html",{'teacher':teacher,'staff':'active'})
 
-def admission(request):
-    return render(request,"admission.html",{'stu':'active'})
-
 def qoute(request):
     if request.method == "POST":
         term = request.POST.get('term')
@@ -929,6 +1047,85 @@ def view_gallery(request,id):
     cat = Gal_Category.objects.get(pk=id)
     return render(request,"view_gallery.html",{'images':images,'category':cat})
 
+def unique(request):
+    s = school_speciality.objects.all()
+    return render(request,"unique.html",{'about':'active','s':s})
+
+def Student_Showcase(request):
+    Student_Data = Briliant_Students.objects.all()
+    return render(request,"student_showcase.html",{'stu':'active','student':Student_Data})
+
+def add_briliant_stud(request):
+    Student_Data = Briliant_Students.objects.all()
+    gr_data = General_Register.objects.filter(lang='gu')
+    if request.method == "POST":
+        if 'save' in request.POST:
+            student_name = request.POST.get('name')
+            standard = request.POST.get('std')
+            division = request.POST.get('division')
+            achievement = request.POST.get('achieve')
+            date = request.POST.get('date')
+            try:
+                save_data = Briliant_Students.objects.create(student_name=student_name,standard=standard,division=division,achievement=achievement,date=date)
+                save_data.save()
+                messages.success(request,"Student Saved Successfully!")
+            except:
+                messages.error(request,"Something Went Wrong!")
+        elif 'delete' in request.POST:
+            delid = request.POST.get('delete')
+            delete_stu = Briliant_Students.objects.filter(pk=delid).delete()
+    return render(request,"add_briliant_stud.html",{"nav":'active','student':Student_Data,'gr_data':gr_data})
+
+def add_account(request):
+    khatu = Account_Model.objects.all()
+    if request.method == "POST":
+        if 'add' in request.POST:
+            try:
+                year = request.POST.get('year')
+                account = request.POST.get('account')
+                add_account = Account_Model.objects.create(year=year,account_name=account)
+                add_account.save()
+                messages.success(request,'Account Added Successfully!')
+            except:
+                messages.error(request,'Something Went Wrong!')
+        elif 'delete' in request.POST:
+            delid = request.POST.get('delete')
+            deldata = Account_Model.objects.filter(pk=delid).delete()
+        elif 'btnyear' in request.POST:
+            yearfil = request.POST.get('yearfil')
+            khatu = Account_Model.objects.filter(year=yearfil)
+    return render(request,"add_account.html",{'acc':khatu})
+
+def view_account(request):
+    return render(request,"view_account.html")
+
+def edit_grant(request,id):
+    khatu = Account_Model.objects.all()
+    granted = Grant_Register.objects.get(pk=id)
+    if request.method == "POST":
+        try:
+            accountid = request.POST.get('account')
+            account = Account_Model.objects.get(pk=accountid)
+            entry_no = request.POST.get('enno')
+            grant_det = request.POST.get('grantdet')
+            amount = request.POST.get('amount')
+            order_no = request.POST.get('odno')
+            deposite_date = request.POST.get('deposite_date')
+            remarks = request.POST.get('remarks')
+            grant_entry = Grant_Register.objects.filter(pk=id).update(account=account,entry_no=entry_no,grant_details=grant_det,amount=amount,order_no=order_no,bank_deposite_date=deposite_date,remarks=remarks)
+            grant_entry.save()
+            messages.success(request,"Grant Updated Successfully!")
+        except:
+            messages.error(request,"Something Went Wrong!")
+        return redirect('grant')
+    return render(request,"edit_grant.html",{'acc':khatu,'grant':granted})
+
+def guidance(request):
+    return render(request,"guidance.html")
+    
+def principal_message(request):
+    return render(request,"principals_message.html")
+    
 def logout(request):
     auth.logout(request)
     return redirect('/')

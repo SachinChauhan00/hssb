@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    <title>
+        Student Showcase | Gov. Secondary School Babarkot
+    </title>
+{% endblock title %}
+
+{% block content %}
+<style>
+    .card{
+        border-radius: 20px;
+        color:white;
+        background-color: {{request.session.color}};
+    }
+    .card:hover{
+        background: #00c6ff;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #0072ff, #00c6ff);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #0072ff, #00c6ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */        
+    }
+    .fa-medal{
+        color: white;
+    }
+</style>
+    <div class="container">
+        <p class="fw-bold fs-2 text-center mt-3" style="color: {{request.session.color}};">શાળાના તેજસ્વી વિદ્યાર્થીઓ</p>
+        
+            <div class="row row-cols-1 row-cols-lg-4 g-4">
+                {% for stu in student %}
+                  
+                <div class="col">
+                  <div class="card p-3 shadow-sm border border-3 border-white">
+                    <i class="fa-solid fa-medal" style="font-size: 50px;"></i>
+                    <div class="card-body">
+                      <h5 class="card-title fw-bold text-capitalize fs-4">{{stu.student_name}} <br>
+                        ({{stu.standard}}{{stu.division}})</h5>
+                        <hr>
+                      <p class="card-text fs-5"><b>સિધ્ધિ :</b> {{stu.achievement}}
+                    </p>
+                    <p class="card-text fs-6"><em>{{stu.date}}</em></p>
+
+                    </div>
+                  </div>
+                </div>
+
+                {% endfor %}
+            </div>
+    </div>
+{% endblock content %}
+    
+    

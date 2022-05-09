@@ -20,6 +20,7 @@
                     class="bi bi-person-plus-fill" style="font-size: 20px;"></i></button>
         </div>
     </form>
+    {% include 'messages.html' %}
     <div class="shadow p-3" style="border-radius: 20px;background-color:
         {{request.session.color}};">
         <div class="table-responsive">
@@ -27,6 +28,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Entry No.</th>
+                        <th scope="col">Account</th>
                         <th scope="col">Grant Detail</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Order No./Deposite No.</th>
@@ -41,6 +43,7 @@
 
                     <tr>
                         <th scope="row">{{grant.entry_no}}</th>
+                        <td>{{grant.account.account_name}}</td>
                         <td>{{grant.grant_details}}</td>
                         <td>{{grant.amount}}</td>
                         <td>{{grant.order_no}}</td>
@@ -48,10 +51,12 @@
                         <td>{{grant.remarks}}</td>
                         <form method="post">
                             {% csrf_token %}
-                            <td><button class="btn btn-light" style="border-radius: 10px;" value="{{grant.id}}" name="edit"><i class="bi
-                                        bi-pencil-square"></i></button></td>
-                            <td><button class="btn btn-light" style="border-radius: 10px;" value="{{grant.id}}" name="delete"><i class="bi
-                                        bi-journal-x"></i></button></td>
+                            <td><button class="btn btn-light" style="border-radius: 10px;" value="{{grant.id}}" name="edit">
+                                <i class="fa-solid fa-pen-to-square" style="color: {{request.session.color}};"></i>
+                            </button></td>
+                            <td><button class="btn btn-light" style="border-radius: 10px;" value="{{grant.id}}" name="delete">
+                                <i class="fa-solid fa-eraser" style="color: {{request.session.color}};"></i>
+                            </button></td>
                         </form>
                     </tr>
 

@@ -5,31 +5,85 @@
 </title>
 {% endblock title %}
 {% block content %}
-<div class="container-fluid text-center mt-3 pt-3">
+<div class="container-fluid text-center mt-1 pt-3">
     <form method="post">
         {% csrf_token %}
+        <div class="d-flex">
+
+        </div>
         <div class="d-flex justify-content-between mb-3">
             <button type="submit" name="download" class="btn text-white pe-4
                 ps-4" style="background-color: {{request.session.color}};border-radius: 20px;"><i
                     class="bi bi-download" style="font-size: 20px;"></i></button>
-            <p class="fs-2 fw-bold" style="color: {{request.session.color}};">સામાન્ય વય પત્રક</p>
+            <p class="fs-2 fw-bold" style="color: {{request.session.color}};">General Register</p>
             <button type="submit" name="add" class="btn text-white pe-4
                 ps-4" style="background-color: {{request.session.color}};border-radius: 20px;"><i
                     class="bi bi-person-plus-fill" style="font-size: 20px;"></i></button>
         </div>
     </form>
-    
+    {% include "messages.html" %}
     <div class="p-3 shadow" style="background-color: {{request.session.color}};border-radius:15px">
+        <form method="post">
+            {% csrf_token %}
+            <div class="d-flex mb-2">
+                <input class="form-control me-2" list="gr" placeholder="GR No." name="gr">
+                <datalist id="gr">
+                    
+                    {% for gr_data in gr_data %}
+                                            
+                    <option value="{{gr_data.gr_number}}">
+
+                    {% endfor %}
+
+                </datalist>
+                <button type="submit" class="btn btn-light me-2" name="grfil" style="color: {{request.session.color}};border-radius:10px;"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input class="form-control me-2" list="name" placeholder="Student" name="name">
+                <datalist id="name">
+                    
+                    {% for gr_data in gr_data %}
+                                            
+                    <option value="{{gr_data.student_name}}">
+
+                    {% endfor %}
+
+                </datalist>
+                <button type="submit" class="btn btn-light" name="namefil" style="color: {{request.session.color}};border-radius:10px;"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <div class="d-flex mb-3">
+                
+                <input class="form-control me-2" list="datalistOptions" placeholder="Year" name="year">
+                <datalist id="datalistOptions">
+                    
+                    {% for gr_data in gr_data %}
+                                            
+                    <option value="{{gr_data.entry_year}}">
+
+                    {% endfor %}
+
+                </datalist>
+                <button type="submit" class="btn btn-light me-2" name="yearfil" style="color: {{request.session.color}};border-radius:10px;"><i class="fa-solid fa-calendar-days"></i></button>
+                <input class="form-control me-2" list="UDISE" placeholder="UDISE" name="UDISE">
+                <datalist id="UDISE">
+                    
+                    {% for gr_data in gr_data %}
+                                            
+                    <option value="{{gr_data.udise}}">
+
+                    {% endfor %}
+
+                </datalist>
+                <button type="submit" class="btn btn-light" name="udisefil" style="color: {{request.session.color}};border-radius:10px;"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </form>
         <div class="table-responsive">
-            <table class="table text-white table-bordered border-white">
+            <table class="table text-light table-bordered">
                 <thead>
-                    <input class="form-control mt-2 mb-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Student Name">
                     <tr>
                         <th scope="col">{{cl1}}</th>
-                        <th scope="col">{{cl2}}</th>
-                        <th scope="col">{{cl3}}</th>
+                        <th scope="col">{{cl2}}</th>    
+                        <th scope="col">{{cl3}}</th>    
                         <th scope="col">{{cl4}}</th>
-                        <th scope="col">{{cl5}}</th>
+                        <th scope="col">{{cl4}}</th>
                         <th scope="col">{{cl6}}</th>
                         <th scope="col">{{cl7}}</th>
                         <th scope="col">{{cl8}}</th>
@@ -45,12 +99,14 @@
                         <th scope="col">{{cl18}}</th>
                         <th scope="col">{{cl19}}</th>
                         <th scope="col">{{cl20}}</th>
+                        <th scope="col">{{cl21}}</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for gr in gr %}
                     <tr>
                         <th scope="row">{{gr.gr_number}}</th>
+                        <td>{{gr.udise}}</td>
                         <td>{{gr.student_name}}</td>
                         <td>{{gr.mother_name}}</td>
                         <td>{{gr.religion}}</td>
@@ -68,10 +124,15 @@
                         <td>{{gr.behaviour}}</td>
                         <td>{{gr.date_taking_lc}}</td>
                         <td>{{gr.note}}</td>
-                        <td><a class="link-light" href=""><i class="bi
-                                    bi-pencil-square" style="font-size: 20px;"></i></a></td>
-                        <td><a class="link-light" href=""><i class="bi bi-trash"
-                                    style="font-size: 20px;"></i></a></td>
+                        <form method="post">
+                            {% csrf_token %}
+                            <td>
+                                <button type="submit" name="edit" class="btn btn-light" value="{{gr.id}}" style="color: {{request.session.color}};border-radius:15px;"><i class="fa-solid fa-user-pen"></i></button>
+                            </td>
+                            <td>
+                                <button type="submit" name="delete" class="btn btn-light" value="{{gr.id}}" style="color: {{request.session.color}};border-radius:15px;"><i class="fa-solid fa-user-xmark"></i></button>
+                            </td>
+                        </form>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -90,27 +151,4 @@
         color: white;
     }
 </style>
-<script>
-    function myFunction() {
-      // Declare variables
-      var input, filter, table, tr, td, i, txtValue;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("myTable");
-      tr = table.getElementsByTagName("tr");
-
-      // Loop through all table rows, and hide those who don't match the search query
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-          txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }
-      }
-    }
-  </script>
 {% endblock content %}

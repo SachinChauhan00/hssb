@@ -20,6 +20,7 @@
                     class="bi bi-person-plus-fill" style="font-size: 20px;"></i></button>
         </div>
     </form>
+    {% include 'messages.html' %}
     <div class="shadow p-3" style="border-radius: 20px;background-color:
         {{request.session.color}};">
         <div class="table-responsive">
@@ -28,6 +29,7 @@
                     <tr>
                         <th scope="col">એન્ટ્રી નં.</th>
                         <th scope="col">તારીખ</th>
+                        <th scope="col">ખાતાનું નામ</th>
                         <th scope="col">ખાતાનું નામ અને વિગત</th>
                         <th scope="col">રસીદ/વાઉચર નંબર</th>
                         <th scope="col">કુલ રકમ</th>
@@ -41,11 +43,12 @@
                     <tr>
                         <th scope="row">{{cashb.entry_no}}</th>
                         <td>{{cashb.date | date:'SHORT_DATE_FORMAT'}}</td>
+                        <td>{{cashb.account.account_name}}</td>
                         <td>{{cashb.name_and_particulars}}</td>
                         <td>    
-                            {% if cashb.voucher_no == 'None' %}
+                            {% if cashb.debit_or_credit == 'જમા' %}
                             {{cashb.reciept}}
-                            {% else %}
+                            {% elif cashb.debit_or_credit == 'ઉધાર' %}
                             {{cashb.voucher_no}}
                             {% endif %}
                         </td>

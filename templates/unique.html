@@ -1,0 +1,82 @@
+{% extends 'main.html' %}
+{% block title %}
+<title>
+    Facilities | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+
+{% block content %}
+    
+<div class="container-fluid text-center bad pt-5 pb-4 shadow" >
+    <!-- START THE FEATURETTES -->
+    <p class="fs-2 fw-bold text-white"> <i class="fa-solid fa-book-open-reader"></i> શાળાની વિશેષતાઓ</p>
+    
+
+		<style>
+      .bad{
+        background: #1FA2FF;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
+      .bad:hover{
+        background: #A6FFCB;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #1FA2FF, #12D8FA, #A6FFCB);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #1FA2FF, #12D8FA, #A6FFCB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
+      .push{
+        width: 0px;
+      }
+
+    </style>
+</div>
+  
+<style>
+ .card{
+   border-radius: 20px;
+ }
+ .card:hover{
+  transition: 0.5s ease-in-out;  
+  background-color: {{request.session.color}};
+    color: white;
+    
+ }
+  @media only screen and (min-width : 1224px) {
+      .cal{
+          width: 900px;
+      }
+/* Styles */
+}
+</style>
+<div class="container mt-5">
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    
+    {% for s in s %}
+            
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="card-body text-start">
+          <p class="card-text fw-bold fs-5"><i class="fa-solid fa-hand-point-right"></i>&nbsp; {{s.body}}</p>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+
+  </div>
+</div>
+{% endblock content %}
+<!-- <p class="fs-4 " style="color: {{request.session.color}};"><i class="bi bi-chevron-double-right"></i> શાળામાં ઉપલબ્ધ વિવિધ સુવિધાઓ :</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; ડિજિટલ સ્માર્ટબોર્ડથી દ્રશ્ય-શ્રાવ્ય માધ્યમથી જીવંત શિક્ષણ.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; સ્પર્ધાત્મક પરીક્ષામાં ઉતીર્ણ થયેલ લાયકાત ધરાવતા, તાલીમબધ્ધ થયેલા શિક્ષકો ધ્વારા શિક્ષણકાર્ય.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; વોકેશનલ એડ્યુકેશન માટે લેબની સુવિધા.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; આધુનિક કોમ્પ્યુટર લેબ.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; ગણિત વિજ્ઞાન વિષય સાધન સામગ્રી.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; શૈક્ષણિક સાધનો.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; ટ્રાન્સપોટેશનની સુવિધા.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; પુસ્તક લાઈબ્રેરી.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; રમત ગમત ના સાધનો, અને રમવા માટે મોટું મેદાન.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; પીવાના શુધ્ધ પાણીની સુવિધા.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; કુમાર,કન્યા અને દિવ્યાંગ બાળક માટે અલગ સેનિટેશનની સુવિધા.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; અભ્યાસ માટે અધ્યતન બિલ્ડીંગ અને સ્વચ્છ હવા ઉજાસ વાળા વર્ગખંડ.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; સાબુ બેન્કની સુવિધા.</p>
+    <p class="fs-6"><i class="bi bi-chevron-right"></i> &nbsp; ફર્સ્ટ એઇડ કીટ.</p> -->

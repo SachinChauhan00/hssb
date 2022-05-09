@@ -14,7 +14,7 @@
         {% csrf_token %}
         <input type="text" class="form-control mb-2" name="title"
             placeholder="Notice Title">
-        <textarea name="body" class="form-control mb-2" cols="30" rows="5"
+        <textarea name="body" class="form-control mb-2" cols="30" rows="10"
             placeholder="Notice Body"></textarea>
         <button type="submit" class="btn w-100 text-white"
             style="background-color: {{request.session.color}};">Submit</button>

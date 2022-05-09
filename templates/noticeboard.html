@@ -8,16 +8,22 @@
 
 {% block content %}
 <div class="text-center container mt-3 text-white">
-    <p class="fs-2 fw-bold">નોટિસબોર્ડ</p>
+    <p class="fs-2 fw-bold" style="color: {{request.session.color}};">નોટિસબોર્ડ</p>
 </div>
-<div class="container p-3 text-white text-center cal border border-white
-    border-3
-    mt-3" style="border-radius: 20px;">
+
+<div class="container pe-3 ps-3 pb-3 text-white text-center cal" style="border-radius: 20px;">
+    <form method="post">
+        <div class="d-flex mb-3">
+                {% csrf_token %}
+                <input type="text" class="form-control me-2 " name="filter" placeholder="Search Notice">
+                <button type="submit" class="btn text-white " style="background-color: {{request.session.color}};"><i class="bi bi-filter-circle-fill"></i></button>
+        </div>
+    </form>
     {% for text in text %}
 
-    <div class="bg-white p-3" style="border-radius: 10px 10px;">
-        <p class="fs-3 fw-bold tex p-2" style="border-radius: 15px;">{{text.title}}</p>
-        <p class="fs-6 text-dark">{{text.body}}</p>
+    <div class="bg-dark p-3 shadow" style="border-radius: 25px;">
+        <p class="fs-3 fw-bold tex pe-3 ps-3 pt-2 pb-2" style="border-radius: 15px;background-color:{{request.session.color}};">{{text.title}}</p>
+        <p class="fs-6">{{text.body}}</p>
     </div>
 
     {% endfor %}
@@ -28,16 +34,6 @@
                 width: 50%;
             }
     /* Styles */
-    }
-    .tex{
-    background: #232526;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    }
-    body{
-    background: #1FA2FF;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
     </style>
 {% endblock content %}

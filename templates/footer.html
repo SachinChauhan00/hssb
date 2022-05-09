@@ -1,13 +1,20 @@
 
 <!-- Footer -->
-
-<footer class="footer sticky-bottom text-center shadow" style="color:{{request.session.color}};background-color: white;padding-top: 50px;">
+<style>
+  footer{
+    background: #00c6ff;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #0072ff, #00c6ff);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #0072ff, #00c6ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    color: white;  
+  }
+</style>
+<footer class="footer sticky-bottom text-center" style="padding-top:60px;">
   
   <!-- Copyright -->
   <strong>
     <div class="text-center">
       © {% now 'Y' %} Copyright :
-      <a class="link-dark" href="https://govsecondaryschoolbabarkot.com">www.govsecondaryschoolbabarkot.com</a>
+      <a class="link-light" href="https://www.govsecbabarkot.in">www.govsecbabarkot.in</a>
     </div>
   </strong>
   

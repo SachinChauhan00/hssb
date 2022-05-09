@@ -1,0 +1,63 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}
+<title>
+    Principal's Message | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="row mt-5 row-cols-1 row-cols-md-2">  
+        <style>
+            .princ{
+                background-image: url({% static 'img/principal.png' %});
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            @media only screen and (max-width: 480px) {
+
+                .princ{
+                  height: 400px;
+                  width: 350px;
+                }
+              }
+        </style>
+    <div class="col mx-auto col-md-4 princ border border-3 border-white shadow" style="border-radius: 25px;">
+    </div>
+    <div class="col">
+    <p class="fs-2 text-center mt-3 fw-bold" style="color:
+        {{request.session.color}};">આચાર્યનો સંદેશ</p>
+    <p>
+        &emsp;&emsp;&emsp;હું આપ સૌને વર્ષ 2022/23 ના શૈક્ષણિક વર્ષમાં આવકારતા
+        આનંદની લાગણી
+        અનુભવું છું ગતવર્ષ શાળાનું આંગણ વિવિધ પ્રવૃતિઓથી ધમ-ધમતું રહ્યું શાળાનું
+        પરિણામ પણ સારું રહ્યું આ વર્ષ પણ સારું પરિણામ મેળવો એવી શ્રી સરકારી
+        માધ્યમિક શાળા -બાબરકોટ શાળા પરિવારની સૌને શુભેચ્છા.
+    </p>
+    <p>
+        &emsp;&emsp;&emsp;તમારા જીવનનું ધ્યેય નક્કી કરો અને એ દિશામાં આગળ વધતા
+        રહો પ્રયત્ન કરો ઈશ્વર તમારી સાથે રહેશે. આજના સ્પર્ધાયુગ માં આપ વાણી
+        વર્તન અને વિચારથી પુષ્ટ બનો. અભ્યાસના મૂલ્યોને સમજી ઉત્તરોતર પ્રગતિ કરો.
+        દરેક પડકારો જીલવા સક્ષમ બનો એવી આપ સર્વોને શુભેચ્છા.
+    </p>
+    <p class="text-center fw-bold">
+        અમે અમારી જવાબદારીઓ નિભાવવા માટે અમારા શ્રેષ્ઠ પ્રયાસો
+        કરીશું. અમને તમારા જીવનના અભિન્ન ભાગ તરીકે પસંદ કરવા માટે આભાર.
+    </p>
+    <p>
+        &emsp;&emsp;&emsp;<b>શિક્ષકોને સંદેશ -</b> મારા વહાલા શિક્ષકો, આપશ્રી
+        ર્વિદ્યાર્થીઓના હદયમાં સ્થાન પ્રાપ્ત કરી શિક્ષણ જગતમાં શ્રેષ્ઠતમ કાર્ય
+        કરી પ્રેરણાસ્ત્રોત બનો તેમજ આપ ભવિષ્યમાં એક આદર્શ શિક્ષક તરીકેનું સન્માન
+        પ્રાપ્ત કરો તેવી શુભેચ્છા.
+    </p>
+    <p>
+        &emsp;&emsp;&emsp;<b>વિદ્યાર્થીઓને સંદેશ -</b> મારા વહાલા વિદ્યાર્થીઓ, આપશ્રી
+        શૈક્ષણિક કાર્ય ગુણવત્તાસભર અને અસરકારક રીતે પ્રાપ્ત કરો અને મૂલ્યલક્ષી
+        શિક્ષણ પ્રાપ્ત કરી ભવિષ્યમાં એક આદર્શ વિદ્યાર્થી અને દેશના આદર્શ નાગરિક
+        બનો તેથી શુભેચ્છા.
+    </p>
+    <p class="text-center"><mark>“સતત મહેનત કરો,અભ્યાસ કરો અને સફળતા પ્રાપ્ત કરો”</mark></p>
+    </div>
+    </div>
+</div>
+{% endblock content %}

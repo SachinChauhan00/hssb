@@ -2,108 +2,383 @@
 {% load static %}
 {% block title %}
 <title>Home | Gov. Secondary School Babarkot</title>
+
 {% endblock title %}
 {% block content %}
-
-{% load static %}
-<div id="carouselExampleDark"
-     class="carousel slide"
-     data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button"
-                data-bs-target="#carouselExampleDark"
-                data-bs-slide-to="0"
-                class="active"
-                aria-current="true"
-                aria-label="Slide 1">
-        </button>
-        <button type="button"
-                data-bs-target="#carouselExampleDark"
-                data-bs-slide-to="1"
-                aria-label="Slide 2"></button>
-        
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="5000" >
-            <img src="{% static 'img/Stripe.png' %}"
-                 class="d-block w-100"
-                 height="600"
-                 alt="...">
-            
-            <div class="carousel-caption" style="margin-bottom: 100px;">
-              <img src="{% static 'img/logo.png' %}" alt="logo" width="300">
-                <p class="fs-1 fw-bold">
-                   	સુસ્વાગતમ્
-                </p>
-            </div>
-        </div>
-        <div class="carousel-item" data-bs-interval="5000">
-            <img src="{% static 'img/Stripe(1).png' %}"
-                 class="d-block w-100"
-                 height="600"
-                 alt="...">
-            <div class="carousel-caption text-white p-1 border border-white border-3 " style="margin-bottom: 200px; border-radius: 20px;">
-                <p class="fs-1 fw-bold">
-                    {{quote.term}}
-                </p>
-                <p class="fs-2">
-                    {{quote.qoute}}
-              </p>
-            </div>
-        </div>
-    </div>
-    <button class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleDark"
-            data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleDark"
-            data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-
-
 <style>
+  .log{
+    background: #1FA2FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  @media only screen and (max-width: 480px) {
+
+    .log{
+      height: 350px;
+    }
+  
+  }
+  
+  .quote{
+    background: #1FA2FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #A6FFCB, #12D8FA, #1FA2FF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #A6FFCB, #12D8FA, #1FA2FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+  }
+  
+</style>
+<div class="container-fluid shadow p-3 log">
+  <div class="container text-center">
+  <img class="img-fluid" src="{% static 'img/tras.png' %}" alt="logo" width="300">
+  </div>
+</div>
+<div class="quote shadow text-center text-white pt-3 pb-3 ps-2 pe-2 border-top border-white border-4">
+  <p class="fs-2 fw-bold">{{quote.term}}</p>
+  <hr>
+  <p class="fs-6 fw-bold">{{quote.qoute}}</p>
+</div>
+<style>
+  .car1{
+    background-image: url('https://previews.123rf.com/images/rawpixel/rawpixel1507/rawpixel150705568/42752083-success-goal-achievement-successful-complete-concept.jpg?fj=1');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+  }
+  .car2{
+    background-image: url('https://track2traininginstitute.files.wordpress.com/2020/06/world-philosophy-day-education-concept-with-tree-of-knowledge-planting-on-opening-old-big-book-1059422276-47f095a519b64b70b61590b065d8d1bd.jpg?w=1726&h=1&crop=1');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .car3{
+    background-image: url('https://englishtribuneimages.blob.core.windows.net/gallary-content/2021/7/2021_7$largeimg_120027060.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
     .card{
         border-radius:30px;
-        background-image: url('{% static 'img/Stripe.png' %}');
-        height:150px;
+        height:300px;
  
     }
+    
+   
+.push,{
+height: 0px;
+}
 </style>
-<div class="container text-center">
-<p class="fs-2 mt-4 fw-bold text-shadow-2" style="color: {{request.session.color}};">શાળાનાં ત્રણ સૂત્રો</p>
-    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4">
-      
-      <div class="col">
-        <div class="card card-cover overflow-hidden text-white bg-dark shadow-lg">
-          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-            <h3 class="fs-5 fw-bold"><i class="bi bi-vector-pen"></i> શિસ્ત, સંસ્કાર અને શિક્ષણનો ત્રિવેણી સંગમ એટલે અમારી સંસ્થા.</h3>
-          </div>
+<div class="container text-white pt-4 pb-3 text-center">
+  <p class="fs-2 fw-bold text-shadow-2" style="color:
+    {{request.session.color}};">શાળાનાં ત્રણ સૂત્રો</p>
+  <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 text-dark">
+    <div class="col">
+      <div class="card car1 card-cover border border-3 border-white
+        overflow-hidden shadow">
+      </div>
+      <p class="fs-2 fw-bold mt-2" style="position: relative;">શિસ્ત</p>
+    </div>
+    <div class="col">
+      <div class="card car2 card-cover border border-3 border-white
+        overflow-hidden shadow">
+      </div>
+      <p class="fs-2 fw-bold mt-2" style="position: relative;">સંસ્કાર</p>
+    </div>
+    <div class="col">
+      <div class="card car3 card-cover border border-3 border-white
+        overflow-hidden shadow">
+      </div>
+      <p class="fs-2 fw-bold mt-2" style="position: relative;">શિક્ષણ</p>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <hr class="border border-2 border-dark">
+</div>
+<div class="container-fluid pt-2 pb-2 text-white">
+  <p class="fs-2 fw-bold mt-3 text-center" style="color:
+    {{request.session.color}};">
+    શિક્ષણની શરૂઆત
+  </p>
+  <div class="text-center mb-3">
+    <img src="{% static 'img/school.png' %}" class="img-fluid
+      border border-white border-5 shadow" width="900" style="border-radius:
+      50px;">
+  </div>
+  <div class="container-fluid cal text-dark">
+    <p class="fs-6 fw-bold">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;શ્રી
+      સરકારી માધ્યમિક શાળા- બાબરકોટની સ્થાપના તારીખ 16/06/2011
+      ના રોજ થઇ. દરિયા કિનારે મીઠી વીરડી સમાન 10 વર્ષથી લોકોની તરસ છીપાવે છે આ
+      10
+      વર્ષ દરમિયાન શાળાએ ખૂબ જ સંઘર્ષપૂર્ણ પરિસ્થિતિનો સામનો કર્યો છે. એક રીતે આ
+      યાત્રા સંઘર્ષયાત્રા બની રહી છે પરંતુ સમગ્ર શાળા પરિવાર એકતા અને પરસ્પર
+      સહકારની ભાવનાથી “અગવડતાઓમાં સગવડતા ઊભી કરવી” ના સૂત્રને સાર્થક કરતાં આ
+      સૂત્રને જ સ્વભાવ બનાવી સતત ચાલતા રહ્યા. શાળા કાર્યરત રાખવા માટે અનેક
+      પડકારોનો સામનો કરવો પડ્યો જેમાં સૌથી મોટાં પડકારોમાં શાળાને શાળાના
+      બિલ્ડીંગ
+      વગર, શિક્ષકોની ઘટ સાથે, વિદ્યાર્થીઓની બહોળી સંખ્યા અને કોઈપણ પ્રકારની
+      ભૌતિક
+      સુવિધા વગર આજદિન સુધી અવિરત કાર્યરત રાખવાનો હતો. આ પડકારને જીલવામાં શ્રી
+      બાબરકોટ પ્રાથમિક શાળા એ ખૂબ જ સહયોગ આપી સહાયકની ભૂમિકા ભજવી છે. અનેક
+      મુશ્કેલીઓ અને સંઘર્ષો
+      વચ્ચે પણ શિક્ષણ યજ્ઞ અવિરત ચાલુ રહ્યો છે. 'स्वयं दीप: भवेत' એ મુજબ સતત
+      જ્ઞાનનો પ્રકાશ આ શાળા ફેલાવી રહી છે અને અજ્ઞાનના અંધકારને દૂર કરી રહી છે.
+      “શિસ્ત, સંસ્કાર અને શિક્ષણનો ત્રિવેણી સંગમરૂપી આ શાળાએ શિક્ષણનું ઝરણું સતત
+      વહેતું રાખ્યું.”
+      માત્ર શિક્ષણ જ આ શાળાનો ધ્યેય ન રહેતા શિસ્ત, સંસ્કાર,
+      નિષ્ઠા, આધ્યાત્મિકતા, જીવન કૌશલ્યોનો વિકાસ, ઉત્તમ ભાવિ નિર્માણ, ઉત્તમ
+      વિચારધારા, નૈતિક મૂલ્યોનું ઘડતર, વ્યસનમુક્તિ વગેરે સદગુણોનું પણ વહન કરે
+      છે.
+      શાળા ધીમા છતાં મક્કમ પગલે ધ્યેયપ્રાપ્તિ તરફ આગળ વધી રહી છે વિદ્યાર્થીઓમાં
+      બૌધિક, ભાવાત્મક અને આધ્યાત્મિક વિકાસ થાય તેવું વાતાવરણ પૂરું પડતાં રહ્યા
+      છીએ. “સાદું જીવન અને ઉચ્ચ વિચારો” જેવા મહાપુરુષોના જીવનના મૂલ્યો
+      વિદ્યાર્થીઓને શીખવવામાં આવે છે. “શિક્ષણને જીવન જીવવા માટેનું સર્વશ્રેષ્ઠ
+      સાધન બનાવવાના ધ્યેય સાથે જીવનરૂપી સમુદ્રમાં જેટલા ઊંડા પહોંચી શકાય તેટલા જ
+      ઉત્તમ રત્નો પ્રાપ્ત કરી શકાય છે આ સત્યને બાળક અહીંયા શીખે છે.”</p>
+    <div class="text-end mt-4">
+      <figcaption class="blockquote-footer fs-6">
+        Hinaben Chuahan
+      </figcaption>
+    </div>
+  </div>
+</div>
+
+<style>
+
+  .fac:hover {
+    color: white;
+    scale: 0.9;
+    transition: 1s ease-out;
+    background-color: {{request.session.color}};
+}
+</style>
+<div class="container">
+  <hr class="border border-2 border-dark">
+</div>
+<p class="text-center fw-bold fs-2 mt-4" style="color: {{request.session.color}};">શાળાની સુવિધાઓ</p>
+<div class="container mt-3">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-person-chalkboard display-3"></i>
+        </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">શિક્ષક</h5>
+          <hr>
+          <p class="card-text fw-bold">સ્પર્ધાત્મક પરીક્ષામાં ઉતીર્ણ થયેલા
+            લાયકાત ધરાવતા, તાલીમબધ્ધ શિક્ષકો દ્વારા શિક્ષણ.</p>
         </div>
       </div>
-        <div class="col">
-          <div class="card card-cover overflow-hidden text-white bg-dark shadow-lg">
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-3">
-            <h3 class="fs-5 fw-bold"><i class="bi bi-vector-pen"></i> અગવડતાઓ માં સગવડતા ઊભી કરવી એ અમારો સ્વભાવ છે.</h3>
-            </div>
-          </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-chalkboard-user display-3"></i>
         </div>
-  
-  
-        <div class="col">
-          <div class="card card-cover overflow-hidden text-white bg-dark shadow-lg" >
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-              <h3 class="fs-5 fw-bold"><i class="bi bi-vector-pen"></i>  શિક્ષાને જીવનનું શ્રેષ્ઠ સાધન બનાવવું.</h3>
-            </div>
-          </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">સ્માર્ટબોર્ડ</h5>
+          <hr>
+          <p class="card-text fw-bold">દ્રશ્ય-શ્રાવ્ય માધ્યમથી જીવંત શિક્ષણ
+            આપવામાં આવે છે.</p>
         </div>
       </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-computer display-3"></i>
+        </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">કોમપ્યુટર લેબ</h5>
+          <hr>
+          <p class="card-text fw-bold">કોમપ્યુટર શિક્ષણ દ્વારા શિક્ષણને
+            ટેકનૉલોજી સાથે જોડી અધ્યતન શિક્ષણ આપવામાં આવે છે.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-flask display-3"></i>
+        </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">વિજ્ઞાન</h5>
+          <hr>
+          <p class="card-text fw-bold">વિજ્ઞાન વિષયના શૈક્ષણિક સાધનો દ્વારા
+            પ્રયોગ કરાવી અનુભવજન્ય શિક્ષણ આપવામાં આવે છે.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-compass-drafting display-3"></i>
+        </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">ગણિત</h5>
+          <hr>
+          <p class="card-text fw-bold">ગણિતના સાધનો દ્વારા પ્રેક્ટિસ કરાવમાં આવે
+            છે.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-screwdriver-wrench display-3"></i>
+        </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">વોકેશનલ</h5>
+          <hr>
+          <p class="card-text fw-bold">ધોરણ-૯ થી વોકેશનલ વિષયનાં શિક્ષણ દ્વારા
+            જીવન કૌશલ્ય શીખવવામાં આવે છે.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-bus display-3"></i>
+        </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">ટ્રાન્સપોર્ટેશન</h5>
+          <hr>
+          <p class="card-text fw-bold">શાળથી દૂર રહતા વિધ્યાર્થીઓ માટે શાળાએ
+            આવવા-જવા માટે મફત ટ્રાન્સપોર્ટેશન સુવિધા આપવામાં આવે છે.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-book display-3"></i>
+        </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">પુસ્તકાલય</h5>
+          <hr>
+          <p class="card-text fw-bold">મનના વિચારો શુધ્ધ થય જાય એવા અદ્યતન
+            પુસ્તકોથી સુસજ્જ પુસ્તકાલય.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-table-tennis-paddle-ball display-3"></i>
+        </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">રમતગમત</h5>
+          <hr>
+          <p class="card-text fw-bold">નવી શિક્ષણ નીતિ મુજબ બાળકના સર્વાંગી
+            વિકાસ માટે રમતનું મોટું મેદાન અને રમતના સાધનોની સુવિધા .</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-glass-water-droplet display-3"></i>
+        </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">પીવાનું પાણી</h5>
+          <hr>
+          <p class="card-text fw-bold">પીવાના શુધ્ધ પાણીની સુવિધા.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-toilet display-3"></i>
+        </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">સેનિટેશન</h5>
+          <hr>
+          <p class="card-text fw-bold">કુમાર,કન્યા અને દિવ્યાંગ બાળક માટે અલગ
+            સેનિટેશનની સુવિધા.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-school display-3"></i>
+        </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">બિલ્ડીંગ</h5>
+          <hr>
+          <p class="card-text fw-bold">અભ્યાસ માટે અદ્યતન બિલ્ડીંગ અને સ્વચ્છ
+            હવા ઉજાસ વાળા વર્ગખંડ.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-pump-soap display-3"></i>
+        </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">સાબુ બેન્ક</h5>
+          <hr>
+          <p class="card-text fw-bold">સાબુ બેન્ક દ્વારા સ્વચ્છતા ક્રાંતિનું
+            સર્જન.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-glass-water-droplet display-3"></i>
+        </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">ફર્સ્ટ એઇડ કીટ</h5>
+          <hr>
+          <p class="card-text fw-bold">વિકટ પરિસ્થિતીમાં તાત્કાલિક સારવાર માટે
+            ફર્સ્ટ એઇડ કિટની સુવિધા.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card fac shadow p-3 h-100">
+        <div class="mx-auto mt-3">
+          <i class="fa-solid fa-shapes display-3"></i>
+        </div>
+        <div class="card-body mt-3 text-center">
+          <h5 class="card-title fw-bold fs-3">શૈક્ષણિક સાધનો</h5>
+          <hr>
+          <p class="card-text fw-bold">અદ્યતન શિક્ષણ માટે તમામ પ્રકારના શૈક્ષણિક
+            સાધનોની સુવિધા.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}
+{% block map %}
+<div class="text-center">
+  <p class="fs-2 fw-bold" style="color: {{request.session.color}};">શાળાને ગૂગલ
+    મેપ્સ પર જુઓ</p>
+</div>
+<div class="container pt-2 pb-1 mb-3 map border border-white border-5 shadow"
+  style="background-color: {{request.session.color}};border-radius:20px;">
+  <div class="mapouter"><div class="gmap_canvas"><iframe class="w-100 p-2"
+        style="border-radius: 15px;"
+        height="350"
+        id="gmap_canvas"
+        src="https://maps.google.com/maps?q=20.869705712716545,%2071.40835700473312&t=&z=19&ie=UTF8&iwloc=&output=embed"
+        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+    </div>
+  </div>
+</div>
+<style>
+  @media only screen and (min-width : 1224px) {
+    .cal{
+        width: 900px;
+    }
+/* Styles */
+}
+  @media only screen and (max-width: 480px) {
+
+    .map{
+      width:75%;
+    }
+  }
+</style>
+{% endblock map %}

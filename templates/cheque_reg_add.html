@@ -14,6 +14,16 @@
     </p>
     <form method="post">
         {% csrf_token %}
+        <select name="account" id="account" class="form-select form-select-lg mb-2">
+            
+            {% for acc in acc %}
+                                
+            <option value="{{acc.id}}">{{acc.account_name}} ({{acc.year}})</option>
+
+            {% endfor %}
+
+        </select>
+        <hr>
         <input type="text" placeholder="એન્ટ્રી નંબર" name="enno"
             class="form-control form-control-lg mb-2 numberonly" required>
         <input type="text" placeholder="તારીખ" name="date"

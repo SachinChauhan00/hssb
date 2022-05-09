@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    <title>
+        Add Briliant Student | Gov. Secondary School Babarkot
+    </title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container cal">
+        <p class="text-center mt-3 fs-2 fw-bold" style="color: {{request.session.color}};">તેજસ્વી વિદ્યાર્થી ઉમેરો</p>
+        {% include 'messages.html' %}
+		<form method="post">
+            {% csrf_token %}
+            <input class="form-control mb-2" list="datalistOptions" placeholder="Student Name" name="name">
+            <datalist id="datalistOptions">
+                
+                {% for gr in gr_data %}
+                                        
+                <option value="{{gr.student_name}}">
+
+                {% endfor %}
+
+            </datalist>
+            <select name="std" class="form-select mb-2">
+                <option value="STD-10">Standard 10</option>
+                <option value="STD-9">Standard 9</option>
+            </select>
+            <select name="division" class="form-select mb-2">
+                <option value="A">Division A</option>
+                <option value="B">Division B</option>
+                <option value="C">Division C</option>
+                <option value="D">Division D</option>
+                <option value="E">Division E</option>
+                <option value="F">Division F</option>
+            </select>
+            <textarea name="achieve" cols="30" rows="5" class="form-control" placeholder="Student Achievement"></textarea>
+            <input type="text" name="date" placeholder="Date Of Achievement" onfocus="(this.type='date')" class="form-control mt-2" >
+            <button type="submit" class="btn text-white mt-3 w-100" name="save" style="background-color: {{request.session.color}};">Save <i class="fa-solid fa-floppy-disk"></i></button>
+        </form>
+        <p class="mt-5 fw-bold fs-2 text-center" style="color: {{request.session.color}};">તેજસ્વી વિદ્યાર્થીઓનું લિસ્ટ</p>
+        <div class="list-group mt-3">
+            
+            {% for stu in student %}
+                                
+            <a href="#" class="p-3 list-group-item list-group-item-action text-white" style="background-color: {{request.session.color}};border-radius:20px;">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1 fw-bold">{{stu.student_name}} ({{stu.standard}}{{stu.division}})</h5>
+              </div>
+              <p class="mb-1 fw-bold">{{stu.achievement}}<br>
+                {{stu.date}} </p>
+              <form method="post">
+                  {% csrf_token %}
+                  <button type="submit" name="delete" class="btn btn-light w-100" style="border-radius: 10px;" value="{{stu.id}}"><i class="fa-solid fa-xmark"></i></button>
+              </form>
+            </a>
+
+            {% endfor %}
+
+          </div>
+    </div>
+    <style>
+        @media only screen and (min-width : 1224px) {
+            .cal{
+                width: 500px;
+            }
+      /* Styles */
+      }
+    </style>
+{% endblock content %}
+    

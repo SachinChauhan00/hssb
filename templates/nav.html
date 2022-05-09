@@ -31,19 +31,19 @@ li{
 <nav class="pad navbar navbar-expand-lg navbar-light bg-light shadow
     sticky-top">
     <div class="container-fluid">
-        <a class="linear-wipe navbar-brand fs-3" href="{% url 'index' %}">
+        <a class="linear-wipe navbar-brand fs-3 text-wrap" href="{% url 'index' %}">
             <img src="{% static 'img/helo.png' %}" alt="icon" width="55"
                 height="30">
-            <b>માધ્યમિક શાળા બાબરકોટ</b>
+            <b>સરકારી માધ્યામિક શાળા બાબરકોટ</b>
         </a>
-        <button class="navbar-toggler"
+        <button class="navbar-toggler text-white shadow-sm border border-white border-3 pt-2 pb-2"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarColor02"
             aria-controls="navbarColor02"
             aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            aria-label="Toggle navigation" style="background-color: {{request.session.color}};border-radius:10px;">
+            <i class="fa-solid fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -65,13 +65,13 @@ li{
                             <a href="#"
                                 class="dropdown-item dropdown-toggle fw-bold"
                                 data-bs-toggle="dropdown"
-                                data-bs-auto-close="outside">વિધ્યાર્થી સંચાલન</a>
+                                data-bs-auto-close="outside">વિદ્યાર્થી સંચાલન</a>
                             <ul class="dropdown-menu shadow bg-dark">
                                 <li>
                                     <a class="dropdown-item fw-bold" href="{% url 'attence' %}">હાજરી</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item fw-bold" href="{% url 'add_remove_st' %}">વિધ્યાર્થી ઉમેરો કે ઘટાડો</a>
+                                    <a class="dropdown-item fw-bold" href="{% url 'add_remove_st' %}">વિદ્યાર્થી ઉમેરો કે ઘટાડો</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item fw-bold" href="{% url 'viewattence' %}">હાજરી ચકાસો</a>
@@ -98,8 +98,20 @@ li{
                                 data-bs-toggle="dropdown"
                                 data-bs-auto-close="outside">વહીવટી</a>
                             <ul class="dropdown-menu shadow bg-dark">
-                                <li>
-                                    <a class="dropdown-item fw-bold" href="{% url 'gr_view' %}">સામાન્ય વય પત્રક</a>
+                                
+                                <li class="dropend">
+                                    <a href="#"
+                                        class="dropdown-item dropdown-toggle fw-bold"
+                                        data-bs-toggle="dropdown"
+                                        data-bs-auto-close="outside">સામાન્ય વાય પત્રક</a>
+                                    <ul class="dropdown-menu bg-secondary">
+                                        <li>
+                                            <a class="dropdown-item fw-bold" href="{% url 'gr_view_guj' %}">સામાન્ય વય પત્રક (ગુજરાતી)</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item fw-bold" href="{% url 'gr_view' %}">સામાન્ય વય પત્રક (ઇંગ્લિસ)</a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a class="dropdown-item fw-bold" href="{% url 'trial' %}">ટ્રાયલ સર્ટિફિકેટ</a>
@@ -118,6 +130,12 @@ li{
                                 data-bs-toggle="dropdown"
                                 data-bs-auto-close="outside">હિસાબી</a>
                             <ul class="dropdown-menu shadow bg-dark">
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'addaccount' %}">ખાતું ઉમેરો</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="{% url 'viewaccount' %}">ખાતાઓ જુઓ</a>
+                                </li>
                                 <li>
                                     <a class="dropdown-item fw-bold" href="{% url 'grant' %}">ગ્રાન્ટ રજીસ્ટર</a>
                                 </li>
@@ -146,6 +164,9 @@ li{
                         </li>
                         <li>
                             <a class="dropdown-item fw-bold" href="{% url 'addnotice' %}">નોટિસ ઉમેરો</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item fw-bold" href="{% url 'addbriliant' %}">તેજસ્વી વિદ્યાર્થી ઉમેરો/ઘટાડો</a>
                         </li>
                     </ul>
                 </li>
@@ -188,11 +209,11 @@ li{
                     <a class="nav-link {{stu}} fw-bold dropdown-toggle"
                         href="#"
                         data-bs-toggle="dropdown"
-                        data-bs-auto-close="outside">વિધ્યાર્થી મેનૂ</a>
+                        data-bs-auto-close="outside">વિદ્યાર્થી મેનૂ</a>
                     <ul class="dropdown-menu shadow space"
                         style="background-color:{{ request.session.color }};">
                         <li>
-                            <a class="dropdown-item fw-bold" href="{% url 'admission' %}"> પ્રવેશ</a>
+                            <a class="dropdown-item fw-bold" href="https://docs.google.com/forms/d/e/1FAIpQLScDgmzPceJuoAv_q_7BOmUq86pMzo_2A7oLD0v3pS2rK1LevQ/viewform"> પ્રવેશ</a>
                         </li>
                         <li>
                             <a class="dropdown-item fw-bold" href="{% url 'notice'%}"> નોટિસબોર્ડ</a>
@@ -200,13 +221,19 @@ li{
                         <li>
                             <a class="dropdown-item fw-bold" href="{% url 'studlink' %}"> ઉપયોગી લિંક્સ</a>
                         </li>
+                        <li>
+                            <a class="dropdown-item fw-bold" href="{% url 'showcase' %}"> તેજસ્વી વિધ્યાર્થીઓ</a>
+                        </li>
                     </ul>
                 </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-bold {{staff}}" href="{% url 'staff'%}"> સ્ટાફ</a>
+                        <a class="nav-link fw-bold {{staff}}" href="{% url 'staff'%}"> અમારી ટીમ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-bold {{gallery}}" href="{% url 'gallery'%}"> શાળા ગેલેરી</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold" href="{% url 'pmessage'%}"> આચાર્યશ્રીનો સંદેશ</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link {{about}} fw-bold dropdown-toggle"
@@ -219,10 +246,11 @@ li{
                                 <a class="dropdown-item fw-bold" href="{% url 'vision' %}"> શાળાનો ધ્યેય અને મિશન</a>
                             </li>
                             <li>
-                                <a class="dropdown-item fw-bold" href="{% url 'notice'%}"> આચાર્યશ્રીનો સંદેશ</a>
+                                <a class="dropdown-item fw-bold" href="{% url 'unique' %}"> શાળાની વિશેષતાઓ</a>
                             </li>
+                            
                             <li>
-                                <a class="dropdown-item fw-bold" href="{% url 'studlink' %}">માર્ગદર્શન</a>
+                                <a class="dropdown-item fw-bold" href="{% url 'guide' %}">માર્ગદર્શન</a>
                             </li>
                         </ul>
                     </li>
@@ -236,9 +264,8 @@ li{
                     <li class="nav-item">
                         <a class="nav-link {{prol}}"
                             href="{% url 'profile' %}"
-                            style="border-radius: 10px;"><i class="bi
-                                bi-person-circle me-2" style="color:
-                                {{request.session.color}};"></i><b>{{user.first_name}}</b></a>
+                            style="border-radius: 10px;"><i class="fa-solid fa-circle-user fs-5 me-2" 
+                            style="color:{{request.session.color}};"></i><b>{{user.first_name}}</b></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link btn text-white"
@@ -270,14 +297,3 @@ li{
     <!-- modal -->
 
 </nav>
-<style>
-    @media only screen and (max-width: 480px) {
-
-        .space{
-            margin-bottom: 20px;
-        }
-
-      
-    }
-    
-</style>

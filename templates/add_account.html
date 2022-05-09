@@ -1,0 +1,58 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    <title>
+        Add Account | Gov. Secondary School Babarkot
+    </title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container cal mt-3">
+        <p class="fs-2 fw-bold text-center mb-3" style="color: {{request.session.color}};">ખાતું ઉમેરો</p>
+        {% include "messages.html" %}
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" class="form-control form-control-lg mb-2" name="year" placeholder="વહીવટી વર્ષ">
+            <input type="text" class="form-control form-control-lg mb-3" name="account" placeholder="ખાતાનું નામ">
+            <button type="submit" class="btn text-white btn-lg w-100" name="add" style="background-color: {{request.session.color}};">
+                Add Account    
+            </button>
+        </form>
+        <p class="fs-2 fw-bold text-center mt-4 mb-3" style="color: {{request.session.color}};">ખાતાઓનું લિસ્ટ</p>
+        <form method="post">    
+        {% csrf_token %}
+        <div class="d-flex p-3 mb-3" style="background-color: {{request.session.color}};border-radius:10px;">
+                <input type="text" class="form-control me-2" placeholder="Year" name="yearfil">
+                <button type="submit" class="btn btn-light" name="btnyear" style="color: {{request.session.color}};border-radius:10px">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+        </div>
+        </form>
+
+        <ul class="list-group">
+            {% for acc in acc %}
+            
+            <li class="list-group-item text-white fw-bold d-flex justify-content-between align-items-center" style="background-color: {{request.session.color}};">
+                {{acc.account_name}} ({{acc.year}})
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-light" name="delete" value="{{acc.id}}" style="color: {{request.session.color}};border-radius:20px">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </form>
+            </li>
+
+            {% endfor %}
+        </ul>
+    </div>
+    <style>
+        @media only screen and (min-width : 1224px) {
+            .cal{
+                width: 500px;
+            }
+      /* Styles */
+      }
+    </style>
+{% endblock content %}
+    
+    

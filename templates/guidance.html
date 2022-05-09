@@ -1,0 +1,230 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}
+<title>
+    Guidance | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+{% block content %}
+<div class="container cal">
+    <p class="fs-2 fw-bold text-center mt-3" style="color:
+        {{request.session.color}};">માર્ગદર્શન</p>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        <div class="col">
+            <div class="card h-100 border border-3 border-white shadow pt-3 pe-3
+                ps-3">
+                <img src="{% static 'img/004.png' %}" class="card-img-top
+                    mx-auto border border-3 border-white" alt="pdeo"
+                    style="border-radius: 20px;">
+                <div class="card-body text-center fw-bold text-white">
+                    <h5 class="card-title">કાનજીભાઇ ચૌહાણ</h5>
+                    <p class="card-text">(પ્રેરણા પુરુષ)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 border border-3 border-white shadow pt-3 pe-3
+                ps-3">
+                <img src="{% static 'img/002.png' %}" class="card-img-top
+                    mx-auto border border-3 border-white" alt="deo"
+                    style="border-radius: 20px;">
+                <div class="card-body text-center fw-bold text-white">
+                    <h5 class="card-title">એમ.જી.પ્રજાપતિ</h5>
+                    <p class="card-text">(જિલ્લા શિક્ષણાધિકારી)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 border border-3 border-white shadow pt-3 pe-3
+                ps-3">
+                <img src="{% static 'img/003.png' %}" class="card-img-top
+                    mx-auto border border-3 border-white" alt="dei"
+                    style="border-radius: 20px;">
+                <div class="card-body text-center fw-bold text-white">
+                    <h5 class="card-title">લતાબેન ઉપાધ્યાય</h5>
+                    <p class="card-text">(જિલ્લા શિક્ષણ નિરીક્ષક)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 border border-3 border-white shadow pt-3 pe-3
+                ps-3">
+                <img src="{% static 'img/001.png' %}" class="card-img-top
+                    mx-auto border border-3 border-white" alt="pdeo"
+                    style="border-radius: 20px;">
+                <div class="card-body text-center fw-bold text-white">
+                    <h5 class="card-title">ઘનશ્યામભાઇ સોલંકી</h5>
+                    <p class="card-text">(પ્રાથમિક જિલ્લા શિક્ષણાધિકારી)</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="d-flex mt-4">
+    <div class="hr-line text-dark"></div>
+    <div><i class="fa-solid fa-dove"></i></div>
+    <div class="hr-line text-dark"></div>
+</div>
+<style>
+      .hr-line{
+        width: 100%;
+        position: relative;
+        margin: 15px;
+        border-bottom: 3px solid;
+        border-color: {{request.session.color}};
+      }
+      .fa-dove {
+        position: relative;
+        top: 3px;
+        font-size: 50px;
+        color: {{request.session.color}};
+      }
+      .fa-circle-dot {
+        position: relative;
+        top: 3px;
+        font-size: 40px;
+        color: {{request.session.color}};
+      }
+</style>
+<div class="container">
+    <p class="fs-6 text-center mt-4 fw-bold">
+        શિક્ષણક્ષેત્રમાં મારામાં શિક્ષકત્વને હંમેશા વિકાસવવામાં આદર્શ પૂરો
+        પાડનાર જેમના આશીર્વાદ હંમેશ મારી સાથે રહ્યા છે તેવા પરમ પૂજ્ય પિતાશ્રીને
+        અર્પણ...
+    </p>
+    <p class="fs-6">
+        &emsp;&emsp;&emsp;&emsp;&emsp;કર્મક્ષેત્રે હંમેશ સફળ નેતૃત્વ દ્વારા અમને
+        કામ કરવાની અખૂટ તક આપનાર
+        અમારા કામ ને જોઈ આગળ વધતા રહેવા પ્રેરણા આપનાર સતત માર્ગદર્શક એવા જિલ્લા
+        શિક્ષણાધિકારી સાહેબશ્રી માનનીય પ્રજાપતિ સાહેબને તેમના જન્મદિવસ નિમિતે
+        શાળાની એક સફળતા તરીકે આ વેબસાઈટ અર્પણ કરીએ છીએ તેમજ તેમની જ દિવ્યદીર્ઘ
+        દ્રષ્ટિ અને સફળ સંચાલનના કારણે અમો આ સિદ્ધિ હાંસલ કરી શક્યા છીએ માટે આ
+        વેબસાઈટ સાહેબના હાથે લોકાર્પણ કરતા આંનદની લાગણી અનુભવીએ છીએ.
+    </p>
+    <p class="fs-6">
+        &emsp;&emsp;&emsp;&emsp;&emsp;આ વેબસાઈટ બનાવવા માટે મદદરૂપ થનાર શિક્ષણ
+        નિરીક્ષક શ્રી માનનીય લતાબેન ઉપાધ્યાય , જિલ્લા પ્રાથમિક શિક્ષણાધિકારી
+        સાહેબશ્રી સોલંકી સાહેબ તેમજ આ વેબસાઈટ બનવાનું યત્ન કરનાર ભાઈ સચિનભાઈ
+        ચૌહાણ અને શાળા પરિવારનો ઋણ સ્વીકારી આભાર વ્યક્ત કરીએ છીએ. આપ સૌની
+        શુભભાવનાથી આવનારા સમયમાં આ વેબસાઈટ શાળાની વિકાસ માટે ફળદાયી નીવડશે તેમજ
+        શાળા સતત પ્રગતિશીલ બની રહે તેવી આશા સેવીએ છીએ.
+    </p>
+</div>
+<div class="d-flex">
+    <div class="hr-line text-dark"></div>
+    <div><i class="fa-solid fa-circle-dot"></i></div>
+    <div class="hr-line text-dark"></div>
+</div>
+<style>
+        .card{
+            border-radius: 20px;
+            background: #F7971E;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to bottom, #FFD200, #F7971E);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to bottom, #FFD200, #F7971E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            
+        }
+        
+    </style>
+<div class="container">
+    <div class="container text-center mt-2">
+        <p class="fs-2 fw-bold mt-2 mb-3" style="color: {{request.session.color}};">સુભેચ્છા સંદેશ</p>
+        <div class="row row-cols-1 row-cols-md-1 row-cols-lg-3 g-4">
+            <div class="col">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn con p-5 fw-bold fs-5 border border-white border-3 shadow" data-bs-toggle="modal" data-bs-target="#con1">
+                    જિલ્લા શિક્ષણ નિરીક્ષકનો શુભેચ્છા સંદેશ
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="con1" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="container">
+                                    <h5 class="modal-title text-center fw-bold" id="exampleModalLabel">
+                                        જિલ્લા શિક્ષણ નિરીક્ષકનો શુભેચ્છા સંદેશ
+                                    </h5>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="{% static 'img/lataben 003.jpg' %}"
+                                    alt="dei" style="width: 100%;height: auto;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn con p-5 fw-bold fs-5 border border-white border-3 shadow" data-bs-toggle="modal" data-bs-target="#con2">
+                    જિલ્લા શિક્ષણાધિકારીનો શુભેચ્છા સંદેશ
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="con2" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="container">
+                                    <h5 class="modal-title text-center fw-bold" id="exampleModalLabel">
+                                        જિલ્લા શિક્ષણાધિકારીનો શુભેચ્છા સંદેશ
+                                    </h5>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="{% static 'img/parajapati_sir 001.jpg' %}"
+                                    alt="dei" style="width: 100%;height: auto;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn con p-5 fw-bold fs-5 border border-white border-3 shadow" data-bs-toggle="modal" data-bs-target="#con3">
+                    પ્રાથમિક જિલ્લા શિક્ષણાધિકારીનો શુભેચ્છા સંદેશ
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="con3" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="container">
+                                    <h5 class="modal-title text-center fw-bold" id="exampleModalLabel">
+                                        પ્રાથમિક જિલ્લા શિક્ષણાધિકારીનો શુભેચ્છા સંદેશ
+                                    </h5>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="{% static 'img/solanki_sir 001.jpg' %}"
+                                    alt="dei" style="width: 100%;height: auto;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    /* Content of modal div is center aligned */
+    .modal {
+        text-align: center;
+    }
+    .con{
+        border-radius: 20px;
+        height: 200px;
+        color: white;
+        background-color: {{request.session.color}};
+    }
+</style>
+{% endblock content %}

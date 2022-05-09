@@ -28,14 +28,15 @@
                     <tr>
                         <th scope="col">એન્ટ્રી નં.</th>
                         <th scope="col">તારીખ</th>
+                        <th scope="col">ખાતાનું નામ</th>
                         <th scope="col">વિગત</th>
                         <th scope="col">રોજમેળ સંદર્ભ</th>
                         <th scope="col">જમા રુપિયા/પૈસા</th>
                         <th scope="col">ઉધાર રુપિયા/પૈસા</th>
                         <th scope="col">જમા બાકી રુપિયા/પૈસા</th>
                         <th scope="col">ઉધાર બાકી રુપિયા/પૈસા</th>
-                        <th scope="col">ખાતાનું નામ</th>
                         <th scope="col">ફેરફાર કરો</th>
+                        <th scope="col">હટાવો</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,24 +45,23 @@
                     <tr>
                         <th scope="row">{{ledger.entry_no}}</th>
                         <td>{{ledger.date}}</td>
+                        <td>{{ledger.account.account_name}}</td>
                         <td>{{ledger.particulars}}</td>
-                        <td>
-                            <form method="post">
-                                {% csrf_token %}
-                                <a href="{% url 'cashbook_filter' ledger.c_b_r_no.entry_no %}" type="submit" class="btn btn-dark" name="fil" style="border-radius: 15px;">
-                                    <i class="bi bi-search"></i>
-                                </a>
-                            </form>
-                        </td>
+                        <td><a href="{% url 'cashbook_filter' ledger.id %}" class="btn btn-light" style="border-radius: 10px;color:{{request.session.color}};">
+                            <i class="fa-solid fa-magnifying-glass"></i></a></td>
                         <td>{{ledger.credit}}</td>
                         <td>{{ledger.debit}}</td>
                         <td>{{ledger.credit_bal}}</td>
                         <td>{{ledger.debit_bal}}</td>
-                        <td>{{ledger.name_of_account}}</td>
+                        
                         <form method="post">
                             {% csrf_token %}
-                            <td><button class="btn btn-light" style="border-radius: 10px;" value="{{grant.id}}" name="edit"><i class="bi
-                                        bi-pencil-square"></i></button></td>
+                            <td><button class="btn btn-light" style="border-radius: 10px;color:{{request.session.color}};" value="{{ledger.id}}" name="edit">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button></td>
+                            <td><button class="btn btn-light" style="border-radius: 10px;color:{{request.session.color}};" value="{{ledger.id}}" name="edit">
+                                <i class="fa-solid fa-trash"></i>
+                            </button></td>
                         </form>
                     </tr>
 

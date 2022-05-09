@@ -8,24 +8,24 @@
 
 {% block content %}
     <div class="cal container text-center text-white">
-        <p class="fs-2 fw-bold mt-3">
+        <p class="fs-2 fw-bold mt-3" style="color: {{request.session.color}};">
             શિક્ષકો માટે ઉપયોગી લિંક્સ
         </p>
     
-        <div class="border border-white border-5 p-3" style="border-radius: 20px;">
+        <div class="ps-3 pe-3 pb-3" style="border-radius: 20px;">
             <form method="post">
                 <div class="d-flex mb-3">
                         {% csrf_token %}
                         <input type="text" class="form-control me-2 " name="filter" placeholder="Search Link">
-                        <button type="submit" class="btn btn-light" style="color: #0099ff;"><i class="bi bi-filter-circle-fill"></i></button>
+                        <button type="submit" class="btn btn-dark"><i class="fa-solid fa-filter"></i></button>
                 </div>
             </form>
                 
             {% for links in link %}
 
-                <div class="bg-white p-4 mb-3" style="border-radius: 20px;">
-                    <p class="fs-4 term text-dark">{{links.term}}</p>
-                    <a href="{{links.link}}" class="btn btn-dark text-white w-100" style="border-radius: 15px;">Visit <i class="bi bi-box-arrow-up-right"></i></a>
+                <div class="p-4 mb-3 shadow" style="border-radius: 20px;background-color: {{request.session.color}};">
+                    <p class="fs-4 term">{{links.term}}</p>
+                    <a href="{{links.link}}" class="btn btn-dark text-white w-100" style="border-radius: 15px;">Visit <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                 </div>
                 
             {% endfor %}
@@ -39,16 +39,8 @@
             }
     /* Styles */
     }
-  body,.push,.wrapper{
-    background: #2980B9;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #6DD5FA, #0099ff);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #6DD5FA, #0099ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    
-  }
   .term{
-    background: -webkit-linear-gradient(#6DD5FA, #0099ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: white;
   }
     </style>
 {% endblock content %}

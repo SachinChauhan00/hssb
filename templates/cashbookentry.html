@@ -1,0 +1,96 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>
+    Cash Book | Gov. Secondary School Babarkot
+</title>
+{% endblock title %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    
+        <div class="cal container-fluid text-center mt-3 pt-3 pb-3"
+        style="align-items:
+        center;border-radius: 10px;">
+          
+        <p class="fs-2 fw-bold" style="color: {{request.session.color}};">
+            રોજમેળ ( જમા )
+        </p>
+        {% include "messages.html" %}
+        <select name="account" id="account" class="form-select form-select-lg mb-2">
+            
+            {% for acc in acc %}
+                                
+            <option value="{{acc.id}}">{{acc.account_name}} ({{acc.year}})</option>
+    
+            {% endfor %}
+    
+        </select> 
+        <select name="ledg" id="ledg" class="form-select form-select-lg mb-2">
+            
+            {% for led in gen %}
+                                
+            <option value="{{led.id}}">{{led.particulars}} ({{led.date}})</option>
+
+            {% endfor %}
+
+        </select>
+        <hr>
+        <input type="text" class="numberonly form-control form-control-lg mb-2"
+            placeholder="એન્ટ્રી નંબર" name="ccentry">
+        <input type="text" class="form-control form-control-lg mb-2"
+            placeholder="તારીખ" onfocus="(this.type='date')" name="ccdate">
+        <textarea name="ccnameandperticulars" rows="4" placeholder="ખાતાનું નામ અને વિગત" class="form-control form-control-lg mb-2"></textarea>
+        <input type="text" class="form-control form-control-lg mb-2"
+            placeholder="રસીદ નંબર" name="ccreciept">
+        <input type="text" class="form-control form-control-lg mb-2"
+            placeholder="કુલ રકમ" name="cctotal">
+
+    </div>
+    <div class="cal container-fluid text-center mt-3 pt-3 pb-3"
+        style="align-items:
+        center;border-radius: 10px;">
+        <p class="fs-2 fw-bold" style="color: {{request.session.color}};">
+            રોજમેળ ( ઉધાર )
+        </p>
+        
+        <input type="text" class="numberonly form-control form-control-lg mb-2"
+            placeholder="એન્ટ્રી નંબર" name="cdentry">
+        <input type="text" class="form-control form-control-lg mb-2"
+            placeholder="તારીખ" onfocus="(this.type='date')" name="cddate">
+        <textarea name="cdnameandperticulars" rows="4" placeholder="ખાતાનું નામ અને વિગત" class="form-control form-control-lg mb-2"></textarea>
+        <input type="text" class="form-control form-control-lg mb-2"
+            placeholder="વાઉચર નંબર" name="cdvoucher">
+        <input type="text" class="form-control form-control-lg mb-2"
+            placeholder="કુલ રકમ" name="cdtotal">
+        <button type="submit" class="btn btn-lg w-100 text-white" style="background-color: {{request.session.color}};border-radius:10px">
+            Save Data <i class="fa-solid fa-cloud-arrow-up"></i>
+        </button>
+    </div>
+    
+
+    </form>
+    <style>
+    @media only screen and (min-width : 1224px) {
+        .cal{
+            width: 50%;
+        }
+/* Styles */
+}
+</style>
+<script>
+    $(document).ready(function () {    
+    
+        $('.numberonly').keypress(function (e) {    
+
+            var charCode = (e.which) ? e.which : event.keyCode    
+
+            if (String.fromCharCode(charCode).match(/[^0-9]/g))    
+
+                return false;                        
+
+        });    
+
+    });  
+</script>
+    {% endblock content %}
