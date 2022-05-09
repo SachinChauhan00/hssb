@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+
 import os
 from pathlib import Path
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-x7f-a@51*usp)f2ujh38fhy9%mpny9$4$y0$j&yg)%kak0-#_i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.43.68']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -77,8 +77,11 @@ WSGI_APPLICATION = 'babarkotsite.wsgi.application'
 
 DATABASES = {
    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'babarkotdb',
+        'HOST': 'localhost',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
     }
 }
 
